@@ -97,9 +97,8 @@ export default function Curtain() {
     function onTouchMove(e) {
       e.preventDefault();
       if (touchStartY.current === null) return;
-      const currentY = e.touches[0].clientY;
-      addProgress(touchStartY.current - currentY);
-      touchStartY.current = currentY;
+      const delta = touchStartY.current - e.touches[0].clientY;
+      if (Math.abs(delta) > 10) finish();
     }
 
     function onTouchEnd() {
