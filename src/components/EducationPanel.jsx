@@ -1,4 +1,5 @@
 import educationData from '../data/education.json';
+import richText from '../utils/richText';
 
 const entries = [...educationData].sort((a, b) => b.id - a.id);
 
@@ -40,7 +41,7 @@ export default function EducationPanel() {
                   style={{ fontFamily: "'Instrument Sans', sans-serif" }}
                 >
                   {entry.relevantCourses.map((course, i) => (
-                    <li key={i}>{course}</li>
+                    <li key={i}>{richText(course)}</li>
                   ))}
                 </ul>
               </div>
@@ -58,7 +59,7 @@ export default function EducationPanel() {
                   style={{ fontFamily: "'Instrument Sans', sans-serif" }}
                 >
                   {entry.achievements.map((item, i) => (
-                    <li key={i}>{item}</li>
+                    <li key={i}>{richText(item)}</li>
                   ))}
                 </ul>
               </div>

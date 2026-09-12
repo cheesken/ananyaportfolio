@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import projectData from '../data/project.json';
 import ExpandCard from './ExpandCard';
+import richText from '../utils/richText';
 
 const projects = [...projectData].sort((a, b) => b.id - a.id);
 
@@ -110,7 +111,7 @@ export default function ProjectsPanel() {
                       style={{ fontFamily: "'Instrument Sans', sans-serif" }}
                     >
                       {project.description.map((item, i) => (
-                        <li key={i}>{item}</li>
+                        <li key={i}>{richText(item)}</li>
                       ))}
                     </ul>
                   </div>

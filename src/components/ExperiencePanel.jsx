@@ -1,4 +1,5 @@
 import experienceData from '../data/experience.json';
+import richText from '../utils/richText';
 
 const entries = [...experienceData].sort((a, b) => b.id - a.id);
 
@@ -72,7 +73,7 @@ export default function ExperiencePanel() {
                     style={{ fontFamily: "'Instrument Sans', sans-serif" }}
                   >
                     {entry.description.map((item, i) => (
-                      <li key={i}>{item}</li>
+                      <li key={i}>{richText(item)}</li>
                     ))}
                   </ul>
                 </div>
