@@ -1,0 +1,41 @@
+[
+  {
+    "id": 1,
+    "school": "University of Wisconsin-Madison",
+    "degree": "Bachelor of Science in Computer Science",
+    "relevantCourses": [
+      "CS 200: Programming I",
+      "CS 240: Discrete Mathematics",
+      "CS 300: Programming II",
+      "CS 252: Introduction to Computer Engineering",
+      "CS 400: Programming III (DS/Algos)",
+      "CS 354: Computer Organization and Programming",
+      "CS 368: C++ Programming.",
+      "CS 506: Software Engineering",
+      "CS 537: Operating Systems",
+      "CS 540: Introduction to Artificial Intelligence",
+      "CS 536: Intro-Progm Langs & Compilers",
+      "CS 564: Database Management Systems",
+      "CS 638: Agile and Scrum methodologies",
+      "CS 639: Data Management for Data Science",
+      "CS 577: Introduction to Algorithms"
+    ],
+    "achievements": []
+  },
+  {
+    "id": 2,
+    "school": "San Jose State University",
+    "degree": "Master of Science in Software Engineering",
+    "relevantCourses": [
+      "CMPE 257:Machine Learning",
+      "CMPE 258: Deep Learning",
+      "CMPE 273: Distributed Systems",
+      "CMPE 272: Enterprise Software Platforms",
+      "CMPE 202: Software Systems Engineering",
+      "CMPE 255: Data Mining",
+      "CMPE 252: Artificial Intelligence and Data Engineering",
+      "CMPE 286: Internet of Things"
+    ],
+    "achievements": ["Best Hack by Womxn In Tech, Hack For Humanity 2026"]
+  }
+]

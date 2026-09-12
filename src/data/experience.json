@@ -1,0 +1,85 @@
+[
+  {
+    "id": 1,
+    "company": "University of Wisconsin-Madison",
+    "team" : "Division of Information Technology",
+    "tags": ["DevOps", "Integration", "Cloud"],
+    "role": "Enterprise Integration Intern",
+    "duration": "Feb 2021 - Mar 2021",
+    "description": [
+      "Migrated legacy integrations to cloud-native technologies following modern best practices",
+      "Provided end-user support and contributed to internal and external documentation"
+    ],
+    "technologies": []
+  },
+  {
+    "id": 2,
+    "company": "University of Wisconsin-Madison",
+    "team" : "Professor Michael Doescher",
+    "tags": ["Operating Systems"],
+    "role": "Undergraduate Teaching Assistant for CS 354",
+    "duration": "Jan 2021 - Apr 2021",
+    "description": [
+      "Assisted in CS 354 (C Programming and Computer Systems) course.",
+      "Led review sessions, office hours, and developed practice problems for over 500 students."
+    ],
+    "technologies": ["C++", "C"]
+  },
+  {
+    "id": 3,
+    "company": "University of Wisconsin-Madison",
+    "team" : "Professor Sharon Li and Professor Fred Sala",
+    "tags": ["AI/ML"],
+    "role": "Undergraduate Teaching Assistant for CS 540",
+    "duration": "Jan 2021 - Apr 2021",
+    "description": [
+      "Assisted in CS 540 (Introduction to AI)",
+      "Led review sessions, office hours, and developed practice problems for over 500 students."
+    ],
+    "technologies": ["Python", "TensorFlow", "PyTorch"]
+  },
+  {
+    "id": 4,
+    "company": "NetApp",
+    "team" : "RAID, ONTAP",
+    "tags": ["Backend", "Systems Engineering", "Operating Systems"],
+    "role": "Software Engineer Intern",
+    "duration": "May 2021 - Dec 2021",
+    "description": [
+      "Engineered a disk configuration optimizer for ONTAP System Manager that provides real-time recommendations for RAID layouts based on workload analysis",
+      "Delivered end-to-end implementation, including backend APIs (Python/C++), SQL-based data persistence, automated testing frameworks, and frontend integration, increasing system efficiency by 5%",
+      "Contributed to NetApp's distributed storage platform serving enterprise customers with petabyte-scale storage requirements"
+    ],
+    "technologies": ["C++", "C", "Linux"]
+  },
+  {
+    "id": 5,
+    "company": "NetApp",
+    "team" : "RAID, ONTAP",
+    "tags": ["Backend", "Systems Engineering", "Operating Systems"],
+    "role": "Software Engineer",
+    "duration": "Feb 2022 - Jan 2025",
+    "description": [
+      "Led a team of four in the design, architecture, and implementation of a feature that reduced system downtime by 20% caused by disk failures",
+      "Spearheaded the design, architecture, and implementation of a feature that optimizes disk-to-memory space allocation, preventing downsizing and minimizing wasted space on physical disks, resulting in a 50% increase in storage capacity",
+      "Collaborated with the development team to identify critical RAID processes and their dependencies, ensuring comprehensive test coverage for essential functionalities, and improving the reliability and resilience of the RAID subsystem"
+    ],
+    "technologies": ["C++", "C", "Linux"]
+  },
+  {
+    "id": 6,
+    "company": "Amazon",
+    "team" : "SageMaker Unified Studio",
+    "tags": ["Backend", "Systems Engineering", "Operating Systems"],
+    "role": "Software Engineer Intern",
+    "duration": "May 2026 - Aug 2026",
+    "description": [
+      "Built kernel snapshot/restore system for AWS SageMaker Unified Studio, letting data scientists persist and recover full Python session state across kernel restarts without re-running notebooks.",
+      "Designed fire-and-forget HTTP + WebSocket protocol delivering real-time per-variable progress during large object serialization, eliminating polling.",
+      "Implemented dual Zustand state machines coordinating save/restore/retry/cancel across 9 async states between REST and WebSocket events.",
+      "Built race-condition-safe interrupt-and-save/restore flow, sequencing kernel interrupts with snapshot ops under concurrent edge cases.",
+      "Owned system end-to-end: Python serialization backend, 7-endpoint REST/WebSocket API, and React/TypeScript UI with retry, cancel, and error alerting."
+    ],
+    "technologies": ["React", "Python", "Typescript", "AWS", "WebSocket", "REST APIs"]
+  }
+]
