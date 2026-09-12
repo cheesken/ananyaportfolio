@@ -66,11 +66,11 @@ export default function Curtain() {
     function finish() {
       doneRef.current = true;
       if (curtainRef.current) {
-        curtainRef.current.style.transition = 'transform 0.4s cubic-bezier(0.22, 1, 0.36, 1)';
+        curtainRef.current.style.transition = 'transform 0.8s cubic-bezier(0.22, 1, 0.36, 1)';
         curtainRef.current.style.transform = 'translateY(-100%)';
       }
       cleanup();
-      setTimeout(() => setRemoved(true), 450);
+      setTimeout(() => setRemoved(true), 850);
     }
 
     function cleanup() {
