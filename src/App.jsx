@@ -74,7 +74,7 @@ function App() {
 
   return (
     <div
-      className="min-h-screen bg-[#2C2C2C] flex items-center justify-center p-4 sm:p-6 md:p-8"
+      className="h-dvh md:min-h-screen md:h-auto bg-[#2C2C2C] flex flex-col md:items-center md:justify-center p-1 sm:p-2 md:p-8"
       style={{
         backgroundImage: `
           radial-gradient(circle, rgba(0,0,0,0.35) 3px, rgba(255,255,255,0.03) 3.5px, transparent 4px),
@@ -103,7 +103,7 @@ function App() {
       <ContactModal />
       <Curtain />
 
-      <div className="w-full max-w-[960px] min-h-[80vh]">
+      <div className="w-full max-w-[960px] flex flex-col flex-1 md:flex-initial md:min-h-[80vh]">
         {/* Tab nav — desktop: all tabs */}
         <nav className="hidden md:flex gap-1 pl-4">
           {tabs.map(tab => (
@@ -168,7 +168,7 @@ function App() {
 
         {/* Folder body */}
         <main
-          className="relative z-10 rounded-tr-[20px] rounded-b-[20px] p-6 sm:p-8 md:p-10 lg:p-12 h-[75vh] overflow-y-auto"
+          className="relative z-10 rounded-tr-[20px] rounded-b-[20px] p-6 sm:p-8 md:p-10 lg:p-12 flex-1 md:flex-initial md:h-[75vh] overflow-y-auto"
           style={{
             backgroundColor: current.bg,
             backgroundImage: `

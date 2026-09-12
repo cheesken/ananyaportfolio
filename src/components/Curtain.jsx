@@ -43,7 +43,7 @@ export default function Curtain() {
       tickingRef.current = false;
     }
 
-    const SNAP_THRESHOLD = 0.65;
+    const SNAP_THRESHOLD = 0.35;
     let wheelIdleTimer = null;
 
     function addProgress(delta) {
