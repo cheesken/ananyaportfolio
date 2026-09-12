@@ -7,10 +7,10 @@
     "role": "Enterprise Integration Intern",
     "duration": "Feb 2021 - Mar 2021",
     "description": [
-      "Migrated legacy integrations to cloud-native technologies following modern best practices",
-      "Provided end-user support and contributed to internal and external documentation"
+      "Migrated legacy systems integration architectures to scalable, cloud-native platforms, improving system reliability across the university ecosystem.",
+      "Implemented DevOps frameworks that automated integration deployments, reducing manual environment setup times for core university systems."
     ],
-    "technologies": []
+    "technologies": ["Informatica", "AWS", "Apigee"]
   },
   {
     "id": 2,
@@ -20,8 +20,11 @@
     "role": "Undergraduate Teaching Assistant for CS 354",
     "duration": "Jan 2021 - Apr 2021",
     "description": [
-      "Assisted in CS 354 (C Programming and Computer Systems) course.",
-      "Led review sessions, office hours, and developed practice problems for over 500 students."
+      "Assisted in CS 354 (C Programming and Computer Systems).",
+      "Guided 300+ undergraduate students through complex 2021 computer systems concepts, including x86-32 assembly language mappings, virtual memory, and cache organization.",
+      "Debugged manual memory corruption during office hours, training students to utilize the GNU Debugger (GDB) to isolate segmentation faults in pointer-heavy C programs.",
+      "Assisted students with complex programming assignments, including the implementation of a custom dynamic heap memory allocator (malloc/free) using implicit/explicit free lists.",
+      "Collaborated with the 2021 instructional team to proactively identify student roadblocks surrounding stack frame layouts and buffer overflow vulnerabilities."
     ],
     "technologies": ["C++", "C"]
   },
@@ -34,7 +37,10 @@
     "duration": "Jan 2021 - Apr 2021",
     "description": [
       "Assisted in CS 540 (Introduction to AI)",
-      "Led review sessions, office hours, and developed practice problems for over 500 students."
+      "Guided 300+ undergraduate students through core Artificial Intelligence concepts, including machine learning, neural networks, search algorithms, and game theory.",
+      "Debugged complex Python implementations during weekly office hours, helping students resolve logical errors in search heuristics (A*, Minimax) and reinforcement learning models.",
+      "Collaborated with professors and teaching assistants to evaluate student roadblocks and optimize course delivery for a large-enrollment foundational AI course.",
+      "Mentored diverse student teams during coding labs, fostering an inclusive environment that improved retention and confidence in computer science topics."
     ],
     "technologies": ["Python", "TensorFlow", "PyTorch"]
   },
@@ -46,9 +52,10 @@
     "role": "Software Engineer Intern",
     "duration": "May 2021 - Dec 2021",
     "description": [
-      "Engineered a disk configuration optimizer for ONTAP System Manager that provides real-time recommendations for RAID layouts based on workload analysis",
-      "Delivered end-to-end implementation, including backend APIs (Python/C++), SQL-based data persistence, automated testing frameworks, and frontend integration, increasing system efficiency by 5%",
-      "Contributed to NetApp's distributed storage platform serving enterprise customers with petabyte-scale storage requirements"
+      "Designed and developed a production-ready REST API to expose NetApp’s core RAID disk recommender engine, enabling cross-platform integration and modernizing legacy workflow access",
+      "Architected clean API endpoints with strict payload validation, transforming complex internal storage logic into structured, easy-to-consume JSON/RESTful interfaces",
+      "Collaborated with the RAID core engineering team to deeply understand storage architectures (such as RAID-4, RAID-DP, and RAID-TEC) to ensure API parameters perfectly mapped to engine constraints",
+      "Authored comprehensive OpenAPI/Swagger documentation and client integration guides, simplifying onboarding for internal NetApp developer teams using the new endpoint."
     ],
     "technologies": ["C++", "C", "Linux"]
   },
@@ -60,7 +67,7 @@
     "role": "Software Engineer",
     "duration": "Feb 2022 - Jan 2025",
     "description": [
-      "Led a team of four in the design, architecture, and implementation of a feature that reduced system downtime by 20% caused by disk failures",
+      "Led a team of two in the design, architecture, and implementation of a feature that reduced system downtime by 20% caused by disk failures",
       "Spearheaded the design, architecture, and implementation of a feature that optimizes disk-to-memory space allocation, preventing downsizing and minimizing wasted space on physical disks, resulting in a 50% increase in storage capacity",
       "Collaborated with the development team to identify critical RAID processes and their dependencies, ensuring comprehensive test coverage for essential functionalities, and improving the reliability and resilience of the RAID subsystem"
     ],
