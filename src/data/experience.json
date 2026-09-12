@@ -7,8 +7,8 @@
     "role": "Enterprise Integration Intern",
     "duration": "Feb 2021 - Mar 2021",
     "description": [
-      "Migrated legacy systems integration architectures to scalable, cloud-native platforms, improving system reliability across the university ecosystem.",
-      "Implemented DevOps frameworks that automated integration deployments, reducing manual environment setup times for core university systems."
+      "Migrated legacy systems integration architectures to **scalable, cloud-native platforms**, improving **system reliability** across the university ecosystem.",
+      "Implemented DevOps frameworks that **automated integration deployments**, reducing **manual environment setup times** for core university systems."
     ],
     "technologies": ["Informatica", "AWS", "Apigee"]
   },
@@ -23,8 +23,8 @@
       "Assisted in **CS 354 (C Programming and Computer Systems)**.",
       "Guided **300+ undergraduate students** through complex 2021 computer systems concepts, including **x86-32 assembly language mappings, virtual memory, and cache organization**.",
       "Debugged **manual memory corruption** during office hours, training students to utilize the **GNU Debugger (GDB)** to isolate segmentation faults in pointer-heavy C programs.",
-      "Assisted students with complex programming assignments, including the implementation of a custom dynamic heap memory allocator (malloc/free) using implicit/explicit free lists.",
-      "Collaborated with the 2021 instructional team to proactively identify student roadblocks surrounding stack frame layouts and buffer overflow vulnerabilities."
+      "Assisted students with complex programming assignments, including the implementation of a **custom dynamic heap memory allocator (malloc/free)** using implicit/explicit free lists.",
+      "Collaborated with the 2021 instructional team to proactively identify student roadblocks surrounding **stack frame layouts and buffer overflow vulnerabilities**."
     ],
     "technologies": ["C++", "C"]
   },
@@ -37,8 +37,8 @@
     "duration": "Jan 2021 - Apr 2021",
     "description": [
       "Assisted in **CS 540 (Introduction to AI)**",
-      "Guided ~~300+ undergraduate students~~ through core Artificial Intelligence concepts, including ~~machine learning, neural networks, search algorithms, and game theory.~~",
-      "Debugged complex Python implementations during weekly office hours, helping students resolve ~~logical errors in search heuristics (A*, Minimax) and reinforcement learning models.~~",
+      "Guided **300+ undergraduate students** through core Artificial Intelligence concepts, including **machine learning, neural networks, search algorithms, and game theory.**",
+      "Debugged complex Python implementations during weekly office hours, helping students resolve **logical errors in search heuristics (A*, Minimax) and reinforcement learning models.**",
       "Collaborated with professors and teaching assistants to evaluate student roadblocks and optimize course delivery for a large-enrollment foundational AI course.",
       "Mentored diverse student teams during coding labs, fostering an inclusive environment that improved retention and confidence in computer science topics."
     ],
@@ -52,10 +52,10 @@
     "role": "Software Engineer Intern",
     "duration": "May 2021 - Dec 2021",
     "description": [
-      "Designed and developed a production-ready REST API to expose NetApp’s core RAID disk recommender engine, enabling cross-platform integration and modernizing legacy workflow access",
-      "Architected clean API endpoints with strict payload validation, transforming complex internal storage logic into structured, easy-to-consume JSON/RESTful interfaces",
-      "Collaborated with the RAID core engineering team to deeply understand storage architectures (such as RAID-4, RAID-DP, and RAID-TEC) to ensure API parameters perfectly mapped to engine constraints",
-      "Authored comprehensive OpenAPI/Swagger documentation and client integration guides, simplifying onboarding for internal NetApp developer teams using the new endpoint."
+      "Designed and developed a **production-ready REST API** to expose NetApp’s core **RAID disk recommender engine**, enabling **cross-platform integration** and modernizing legacy workflow access.",
+      "Architected clean API endpoints with **strict payload validation**, transforming complex internal storage logic into structured, easy-to-consume **JSON/RESTful interfaces**.",
+      "Collaborated with the RAID core engineering team to deeply understand storage architectures (such as **RAID-4, RAID-DP, and RAID-TEC**) to ensure API parameters perfectly mapped to engine constraints.",
+      "Authored comprehensive **OpenAPI/Swagger documentation** and client integration guides, simplifying onboarding for internal NetApp developer teams."
     ],
     "technologies": ["C++", "C", "Linux"]
   },
@@ -67,9 +67,9 @@
     "role": "Software Engineer",
     "duration": "Feb 2022 - Jan 2025",
     "description": [
-      "Led a team of two in the design, architecture, and implementation of a feature that reduced system downtime by 20% caused by disk failures",
-      "Spearheaded the design, architecture, and implementation of a feature that optimizes disk-to-memory space allocation, preventing downsizing and minimizing wasted space on physical disks, resulting in a 50% increase in storage capacity",
-      "Collaborated with the development team to identify critical RAID processes and their dependencies, ensuring comprehensive test coverage for essential functionalities, and improving the reliability and resilience of the RAID subsystem"
+      "**Led a team of two** in the design, architecture, and implementation of a feature that **reduced system downtime by 20%** caused by disk failures.",
+      "Spearheaded the design, architecture, and implementation of a feature that **optimizes disk-to-memory space allocation**, preventing downsizing and minimizing wasted space on physical disks, resulting in a **50% increase in storage capacity**.",
+      "Collaborated with the development team to identify critical RAID processes and their dependencies, ensuring **comprehensive test coverage** for essential functionalities, and improving the **reliability and resilience** of the RAID subsystem."
     ],
     "technologies": ["C++", "C", "Linux"]
   },
@@ -81,11 +81,11 @@
     "role": "Software Engineer Intern",
     "duration": "May 2026 - Aug 2026",
     "description": [
-      "Built kernel snapshot/restore system for AWS SageMaker Unified Studio, letting data scientists persist and recover full Python session state across kernel restarts without re-running notebooks.",
-      "Designed fire-and-forget HTTP + WebSocket protocol delivering real-time per-variable progress during large object serialization, eliminating polling.",
-      "Implemented dual Zustand state machines coordinating save/restore/retry/cancel across 9 async states between REST and WebSocket events.",
-      "Built race-condition-safe interrupt-and-save/restore flow, sequencing kernel interrupts with snapshot ops under concurrent edge cases.",
-      "Owned system end-to-end: Python serialization backend, 7-endpoint REST/WebSocket API, and React/TypeScript UI with retry, cancel, and error alerting."
+      "Built **kernel snapshot/restore system** for AWS SageMaker Unified Studio, letting data scientists **persist and recover full Python session state** across kernel restarts without re-running notebooks.",
+      "Designed **fire-and-forget HTTP + WebSocket protocol** delivering **real-time per-variable progress** during large object serialization, **eliminating polling**.",
+      "Implemented **dual Zustand state machines** coordinating save/restore/retry/cancel across **9 async states** between REST and WebSocket events.",
+      "Built **race-condition-safe** interrupt-and-save/restore flow, sequencing kernel interrupts with snapshot ops under concurrent edge cases.",
+      "**Owned system end-to-end**: Python serialization backend, **7-endpoint REST/WebSocket API**, and React/TypeScript UI with retry, cancel, and error alerting."
     ],
     "technologies": ["React", "Python", "Typescript", "AWS", "WebSocket", "REST APIs"]
   }

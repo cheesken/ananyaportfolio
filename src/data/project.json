@@ -5,10 +5,10 @@
     "summary": "A vintage folder-themed portfolio with interactive perforated-metal effects, scroll curtain, and stamp-styled UI.",
     "tags": ["Frontend", "Full-Stack"],
     "description": [
-      "Designed and built a skeuomorphic folder-tab interface with per-section color theming, a scroll-to-reveal wax stamp curtain, and JSON-driven content architecture across 5 sections.",
-      "Engineered an interactive perforated-metal background using staggered radial gradients with a cursor-proximity magnify effect via CSS mask-image and CSS custom properties.",
-      "Implemented expandable project cards with embedded YouTube video players, snap-scroll curtain with touch/wheel/keyboard input tracking, and fluid responsive typography using CSS clamp().",
-      "Integrated Resend email API through a Vercel serverless function for the contact form, with floating stamp-styled action buttons for GitHub, LinkedIn, and email."
+      "Designed and built a **skeuomorphic folder-tab interface** with per-section color theming, a scroll-to-reveal wax stamp curtain, and **JSON-driven content architecture** across 5 sections.",
+      "Engineered an interactive **perforated-metal background** using staggered radial gradients with a **cursor-proximity magnify effect** via CSS mask-image and CSS custom properties.",
+      "Implemented **expandable project cards** with embedded YouTube video players, **snap-scroll curtain** with touch/wheel/keyboard input tracking, and fluid responsive typography using **CSS clamp()**.",
+      "Integrated **Resend email API** through a **Vercel serverless function** for the contact form, with floating stamp-styled action buttons for GitHub, LinkedIn, and email."
     ],
     "technologies": ["React", "Vite", "Tailwind CSS", "JavaScript", "Vercel", "Resend API"],
     "github": "https://github.com/cheesken/ananyaportfolio"
@@ -19,11 +19,11 @@
     "summary": "Real-time synchronized lecture-watching app for remote student collaboration.",
     "tags": ["Full-Stack"],
     "description": [
-      "Built a real-time web app that lets students watch lectures together with synchronized video and live chat to recreate in-class interaction online.",
-      "Engineered multi-user rooms and presence tracking using Node.js and Socket.io to support live group discussions during lectures.",
-      "Integrated YouTube API for synchronized playback so all participants stay in lockstep while viewing content.",
+      "Built a **real-time web app** that lets students watch lectures together with **synchronized video and live chat** to recreate in-class interaction online.",
+      "Engineered **multi-user rooms and presence tracking** using Node.js and **Socket.io** to support live group discussions during lectures.",
+      "Integrated **YouTube API** for **synchronized playback** so all participants stay in lockstep while viewing content.",
       "Designed the concept of private \u201cvirtual tables\u201d for small study groups, simulating collaborative classroom behavior in remote learning.",
-      "Deployed and managed the app on AWS EC2 and Heroku, handling production hosting and server setup."
+      "Deployed and managed the app on **AWS EC2 and Heroku**, handling production hosting and server setup."
     ],
     "technologies": [
       "React",
@@ -41,10 +41,10 @@
     "summary": "Data-driven analysis of 15K+ reforestation projects to optimize spending and survival rates.",
     "tags": ["Data Science", "AI/ML"],
     "description": [
-      "Analyzed 15,000+ U.S. reforestation projects to identify cost-efficiency thresholds, discovering $12K/acre sweet spot maximizing survival rates.",
-      "Engineered 23 predictive features including soil composition, climate indices, and temporal variables, improving model R² from 0.43 to 0.78.",
-      "Implemented ensemble approach comparing Ridge, Lasso, and Random Forest models, achieving 15% lower RMSE than baseline linear regression.",
-      "Generated policy recommendations adopted by regional conservation groups for optimizing $2M+ in annual reforestation budgets."
+      "Analyzed **15,000+ U.S. reforestation projects** to identify cost-efficiency thresholds, discovering **$12K/acre sweet spot** maximizing survival rates.",
+      "Engineered **23 predictive features** including soil composition, climate indices, and temporal variables, improving **model R² from 0.43 to 0.78**.",
+      "Implemented ensemble approach comparing **Ridge, Lasso, and Random Forest** models, achieving **15% lower RMSE** than baseline linear regression.",
+      "Generated policy recommendations adopted by regional conservation groups for optimizing **$2M+ in annual reforestation budgets**."
     ],
     "technologies": ["Python", "Scikit-learn", "Pandas", "Matplotlib", "Seaborn"],
     "github": "https://github.com/Kurogisa/Reforestation-Datamining"
@@ -56,10 +56,10 @@
     "video": "https://www.youtube.com/embed/G4NwoHBbgiI",
     "tags": ["AI/ML", "Data Science", "Frontend"],
     "description": [
-      "Built hybrid recommendation engine processing 57,000+ songs and 1.6GB user interaction data.",
-      "Implemented memory-efficient architecture with LRU caching and on-demand similarity computation, reducing storage requirements by 99.9% (3.3M→3.3K values).",
-      "Developed NLP pipeline processing 200K+ song lyrics using TF-IDF vectorization and cosine similarity, handling stemming and stopword removal at scale.",
-      "Deployed interactive Streamlit app with YouTube API integration, serving recommendations with <2s response time for cold-start users."
+      "Built hybrid recommendation engine processing **57,000+ songs** and **1.6GB user interaction data**.",
+      "Implemented **memory-efficient architecture** with **LRU caching** and on-demand similarity computation, reducing storage requirements by **99.9% (3.3M→3.3K values)**.",
+      "Developed **NLP pipeline** processing **200K+ song lyrics** using **TF-IDF vectorization and cosine similarity**, handling stemming and stopword removal at scale.",
+      "Deployed interactive Streamlit app with YouTube API integration, serving recommendations with **<2s response time** for cold-start users."
     ],
     "technologies": ["Python", "Streamlit", "Scikit-learn", "Pandas", "NLTK", "NumPy", "Docker"],
     "github": "https://github.com/yungdennek/Music-Recommendation"
@@ -71,10 +71,10 @@
     "video": "https://www.youtube.com/embed/S9RJcWs5Plc",
     "tags": ["Full-Stack", "Cloud"],
     "description": [
-      "Built peer-to-peer marketplace serving 500+ students with $50K+ transaction volume, featuring GPT-4-powered natural language search converting questions like 'CMPE 202 textbook?' into smart product queries.",
-      "Deployed on AWS with auto-scaled EC2 cluster behind load balancer, implementing JWT authentication, rate limiting (100 req/min), and role-based admin moderation dashboard.",
-      "Engineered real-time chat system with WebSockets handling 1,000+ daily messages with read receipts and sub-second delivery.",
-      "Optimized MongoDB schemas with compound indexes reducing search query time from 400ms to 45ms across 10,000+ listings."
+      "Built peer-to-peer marketplace serving **500+ students** with **$50K+ transaction volume**, featuring **GPT-4-powered natural language search** converting questions like 'CMPE 202 textbook?' into smart product queries.",
+      "Deployed on AWS with **auto-scaled EC2 cluster** behind load balancer, implementing **JWT authentication**, **rate limiting (100 req/min)**, and role-based admin moderation dashboard.",
+      "Engineered **real-time chat system** with WebSockets handling **1,000+ daily messages** with read receipts and **sub-second delivery**.",
+      "Optimized MongoDB schemas with **compound indexes** reducing search query time from **400ms to 45ms** across **10,000+ listings**."
     ],
     "technologies": [
       "React",
@@ -97,10 +97,10 @@
     "video": "https://www.youtube.com/embed/FAUT9S3oNDM",
     "tags": ["AI/ML", "Full-Stack", "Agentic AI"],
     "description": [
-      "Built AI-powered collaborative trip planner using LangGraph multi-agent orchestration coordinating 4 specialized agents with GPT-4 for group consensus.",
-      "Engineered real-time WebSocket architecture handling 20+ concurrent planning sessions with live vote aggregation and agent status broadcasting.",
-      "Implemented fairness tracking algorithm analyzing 100+ group decisions, ensuring no member compromises more than 30% above group average.",
-      "Integrated semantic embeddings with sentence-transformers generating context-aware activity recommendations from 10,000+ destination data points."
+      "Built AI-powered collaborative trip planner using **LangGraph multi-agent orchestration** coordinating **4 specialized agents** with GPT-4 for group consensus.",
+      "Engineered **real-time WebSocket architecture** handling **20+ concurrent planning sessions** with **live vote aggregation** and agent status broadcasting.",
+      "Implemented **fairness tracking algorithm** analyzing **100+ group decisions**, ensuring no member compromises more than **30% above group average**.",
+      "Integrated **semantic embeddings** with **sentence-transformers** generating context-aware activity recommendations from **10,000+ destination data points**."
     ],
     "technologies": [
       "React",
@@ -123,10 +123,10 @@
     "video": "https://www.youtube.com/embed/puFjrt_vZxU",
     "tags": ["AI/ML", "Full-Stack", "Agentic AI"],
     "description": [
-      "Built intelligent moving assistant automating address changes across 10+ services (USPS, utilities, insurance, DMV, banks), reducing 6+ hours to 20 minutes.",
-      "Integrated AWS Nova Act SDK for autonomous browser automation, autofilling forms to final review with 95% accuracy across complex multi-step workflows.",
-      "Implemented real-time checklist tracking with OAuth authentication and DynamoDB persistence, managing state across 40+ individual tasks per user.",
-      "Deployed conversational AI chatbot with context-aware guidance and automated confirmation logging with calendar reminder integration."
+      "Built intelligent moving assistant automating address changes across **10+ services** (USPS, utilities, insurance, DMV, banks), reducing **6+ hours to 20 minutes**.",
+      "Integrated **AWS Nova Act SDK** for **autonomous browser automation**, autofilling forms to final review with **95% accuracy** across complex multi-step workflows.",
+      "Implemented real-time checklist tracking with **OAuth authentication** and **DynamoDB persistence**, managing state across **40+ individual tasks** per user.",
+      "Deployed **conversational AI chatbot** with context-aware guidance and automated confirmation logging with calendar reminder integration."
     ],
     "technologies": ["React", "Next.js", "Python", "AWS Bedrock", "AWS Nova Act SDK", "DynamoDB"],
     "github": "https://github.com/neels22/Transitly"
@@ -138,10 +138,10 @@
     "video": "",
     "tags": ["AI/ML", "Full-Stack", "Agentic AI", "Cloud"],
     "description": [
-      "Engineered a covert domestic violence evidence-collection app disguised as a meditation timer, using a custom React Native scroll picker generating 86,400 unique duration-based passwords to conceal a secure vault from abusers.",
-      "Architected LangGraph multi-agent pipeline with 4 specialized nodes (Ingest, Analysis with Reka AI media understanding, Legal with gap analysis and reportlab-styled PDFs, and Watchdog with APScheduler cron sweeping check-ins every 10s) that processes evidence from upload to court-ready report autonomously.",
-      "Built tiered dead man's switch escalation system integrating Twilio SMS and ElevenLabs TTS voice calls, delivering victim demographics and pre-approved scripts to emergency contacts across 3 severity tiers when check-ins are missed.",
-      "Implemented tamper-proof evidence chain with SHA-256 file hashing on upload, EXIF/GPS metadata extraction via Pillow, and JSONB-backed Supabase storage to preserve forensic integrity across photos, video, audio, and text across 10+ database tables."
+      "Engineered a covert domestic violence evidence-collection app **disguised as a meditation timer**, using a custom React Native scroll picker generating **86,400 unique duration-based passwords** to conceal a secure vault from abusers.",
+      "Architected **LangGraph multi-agent pipeline** with **4 specialized nodes** (Ingest, Analysis with Reka AI media understanding, Legal with gap analysis and reportlab-styled PDFs, and Watchdog with APScheduler cron sweeping check-ins every 10s) that processes evidence from upload to **court-ready report autonomously**.",
+      "Built **tiered dead man's switch** escalation system integrating **Twilio SMS and ElevenLabs TTS voice calls**, delivering victim demographics and pre-approved scripts to emergency contacts across **3 severity tiers** when check-ins are missed.",
+      "Implemented **tamper-proof evidence chain** with **SHA-256 file hashing** on upload, **EXIF/GPS metadata extraction** via Pillow, and JSONB-backed Supabase storage to preserve **forensic integrity** across photos, video, audio, and text across **10+ database tables**."
     ],
     "technologies": [
       "React Native",
