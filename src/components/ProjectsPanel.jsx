@@ -115,20 +115,6 @@ export default function ProjectsPanel() {
                     </ul>
                   </div>
                 )}
-                {project.video && (
-                  <div className="mt-3 sm:mt-4">
-                    <a
-                      href={project.video.replace('/embed/', '/watch?v=')}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-[clamp(0.75rem,1.5vw,0.85rem)] text-[#3E6680] hover:text-[#2E2A22] transition-colors"
-                      style={{ fontFamily: "'Space Mono', monospace" }}
-                      onClick={(e) => e.stopPropagation()}
-                    >
-                      Watch on YouTube &rarr;
-                    </a>
-                  </div>
-                )}
               </>
             }
           />
