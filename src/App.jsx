@@ -8,14 +8,17 @@ import NotesPanel from './components/NotesPanel'
 import EducationPanel from './components/EducationPanel'
 import ContactModal from './components/ContactModal'
 import menuIcon from './asset/menu1.png'
+import notesData from './data/notes.json'
 
-const tabs = [
+const allTabs = [
   { id: 'home', label: 'Home', bg: '#f0e681', text: '#2E2A22' },
   { id: 'projects', label: 'Projects', bg: '#a5d5e7', text: '#2E2A22' },
   { id: 'experience', label: 'Experience', bg: '#E7B6C5', text: '#2E2A22' },
   { id: 'education', label: 'Education', bg: '#a6deb0', text: '#2E2A22' },
   { id: 'notes', label: 'Notes', bg: '#cab6db', text: '#2E2A22' },
 ]
+
+const tabs = allTabs.filter(t => t.id !== 'notes' || notesData.length > 0)
 
 const mobileTabs = tabs.slice(0, 2)
 const overflowTabs = tabs.slice(2)
