@@ -1,16 +1,17 @@
 import { useState } from 'react';
 import notesData from '../data/notes.json';
 import ExpandCard from './ExpandCard';
+import type { Note } from '../types';
 
-const posts = [...notesData].sort((a, b) => b.id - a.id);
+const posts = ([...notesData] as Note[]).sort((a, b) => b.id - a.id);
 
-function formatDate(dateStr) {
+function formatDate(dateStr: string) {
   const d = new Date(dateStr + 'T00:00:00');
   return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
 }
 
 export default function NotesPanel() {
-  const [expandedId, setExpandedId] = useState(null);
+  const [expandedId, setExpandedId] = useState<number | null>(null);
 
   return (
     <div>

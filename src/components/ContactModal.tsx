@@ -1,9 +1,11 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, type ChangeEvent, type FormEvent } from 'react';
+
+type Status = 'sending' | 'sent' | 'error' | null;
 
 export default function ContactModal() {
   const [isOpen, setIsOpen] = useState(false);
   const [form, setForm] = useState({ name: '', email: '', message: '' });
-  const [status, setStatus] = useState(null); // 'sending' | 'sent' | 'error'
+  const [status, setStatus] = useState<Status>(null);
 
   // Lock body scroll when modal is open
   useEffect(() => {
@@ -18,18 +20,18 @@ export default function ContactModal() {
   // Close on Escape key
   useEffect(() => {
     if (!isOpen) return;
-    const handleKey = (e) => {
+    const handleKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') setIsOpen(false);
     };
     window.addEventListener('keydown', handleKey);
     return () => window.removeEventListener('keydown', handleKey);
   }, [isOpen]);
 
-  const handleChange = (e) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setStatus('sending');
     try {

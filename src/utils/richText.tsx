@@ -1,15 +1,15 @@
-import React from 'react';
+import type { ReactNode } from 'react';
 
-const PATTERNS = [
+const PATTERNS: { regex: RegExp; render: (text: string, i: number) => ReactNode }[] = [
   { regex: /\*_(.+?)_\*/g, render: (text, i) => <strong key={i}><em>{text}</em></strong> },
   { regex: /\*\*(.+?)\*\*/g, render: (text, i) => <strong key={i}>{text}</strong> },
   { regex: /__(.+?)__/g, render: (text, i) => <em key={i}>{text}</em> },
   { regex: /~~(.+?)~~/g, render: (text, i) => <u key={i}>{text}</u> },
 ];
 
-const COMBINED = /(\*_.+?_\*|\*\*.+?\*\*|__.+?__|~~.+?~~)/g;
+const COMBINED = /(\*_.+?_\*|\*\*.+?\*\*|__.+?__|~~.+?~~)/;
 
-export default function richText(str) {
+export default function richText(str: string): ReactNode {
   if (!str || !COMBINED.test(str)) return str;
 
   const parts = str.split(COMBINED);

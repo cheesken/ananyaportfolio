@@ -1,7 +1,8 @@
 import experienceData from '../data/experience.json';
 import richText from '../utils/richText';
+import type { Experience } from '../types';
 
-const entries = [...experienceData].sort((a, b) => b.id - a.id);
+const entries = ([...experienceData] as Experience[]).sort((a, b) => b.id - a.id);
 
 export default function ExperiencePanel() {
   return (

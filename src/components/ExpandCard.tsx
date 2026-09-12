@@ -1,7 +1,17 @@
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useState, useEffect, type ReactNode } from 'react';
 
-export default function ExpandCard({ isExpanded, onToggle, header, pills, expandedContent, headerAction, colSpan = 3 }) {
-  const contentRef = useRef(null);
+interface ExpandCardProps {
+  isExpanded: boolean;
+  onToggle: () => void;
+  header: ReactNode;
+  pills?: ReactNode;
+  expandedContent?: ReactNode;
+  headerAction?: ReactNode;
+  colSpan?: number;
+}
+
+export default function ExpandCard({ isExpanded, onToggle, header, pills, expandedContent, headerAction, colSpan = 3 }: ExpandCardProps) {
+  const contentRef = useRef<HTMLDivElement>(null);
   const [height, setHeight] = useState(0);
   const [shouldShow, setShouldShow] = useState(false);
 

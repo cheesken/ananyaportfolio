@@ -10,7 +10,7 @@
       "Implemented **expandable project cards** with embedded YouTube video players, **snap-scroll curtain** with touch/wheel/keyboard input tracking, and fluid responsive typography using **CSS clamp()**.",
       "Integrated **Resend email API** through a **Vercel serverless function** for the contact form, with floating stamp-styled action buttons for GitHub, LinkedIn, and email."
     ],
-    "technologies": ["React", "Vite", "Tailwind CSS", "JavaScript", "Vercel", "Resend API"],
+    "technologies": ["React", "Vite", "Tailwind CSS", "TypeScript", "Vercel", "Resend API"],
     "github": "https://github.com/cheesken/ananyaportfolio"
   },
   {

@@ -3,20 +3,20 @@ import Stamp from './Stamp';
 
 export default function Curtain() {
   const [removed, setRemoved] = useState(false);
-  const curtainRef = useRef(null);
-  const stampRef = useRef(null);
-  const hintRef = useRef(null);
+  const curtainRef = useRef<HTMLDivElement>(null);
+  const stampRef = useRef<HTMLDivElement>(null);
+  const hintRef = useRef<HTMLSpanElement>(null);
   const progressRef = useRef(0);
   const doneRef = useRef(false);
   const tickingRef = useRef(false);
-  const touchStartY = useRef(null);
+  const touchStartY = useRef<number | null>(null);
   const THRESHOLD = 520;
 
   useEffect(() => {
     if (removed) return;
     const timer = setTimeout(() => {
       if (hintRef.current && progressRef.current < 0.25) {
-        hintRef.current.style.opacity = 1 - Math.min(1, progressRef.current / 0.25);
+        hintRef.current.style.opacity = String(1 - Math.min(1, progressRef.current / 0.25));
         hintRef.current.dataset.visible = 'true';
       }
     }, 1100);
@@ -33,20 +33,20 @@ export default function Curtain() {
         curtainRef.current.style.transform = `translateY(-${p * 100}%)`;
       }
       if (stampRef.current) {
-        stampRef.current.style.opacity = 1 - stampFade;
+        stampRef.current.style.opacity = String(1 - stampFade);
       }
       if (hintRef.current) {
         hintRef.current.style.opacity = hintRef.current.dataset.visible === 'true'
-          ? 1 - Math.min(1, p / 0.25)
-          : 0;
+          ? String(1 - Math.min(1, p / 0.25))
+          : '0';
       }
       tickingRef.current = false;
     }
 
     const SNAP_THRESHOLD = 0.35;
-    let wheelIdleTimer = null;
+    let wheelIdleTimer: ReturnType<typeof setTimeout> | null = null;
 
-    function addProgress(delta) {
+    function addProgress(delta: number) {
       if (doneRef.current) return;
       progressRef.current = Math.min(1, Math.max(0, progressRef.current + delta / THRESHOLD));
       if (!tickingRef.current) {
@@ -82,7 +82,7 @@ export default function Curtain() {
       if (wheelIdleTimer) clearTimeout(wheelIdleTimer);
     }
 
-    function onWheel(e) {
+    function onWheel(e: WheelEvent) {
       e.preventDefault();
       addProgress(e.deltaY);
       // snap check after scrolling stops
@@ -90,11 +90,11 @@ export default function Curtain() {
       wheelIdleTimer = setTimeout(snapCheck, 150);
     }
 
-    function onTouchStart(e) {
+    function onTouchStart(e: TouchEvent) {
       touchStartY.current = e.touches[0].clientY;
     }
 
-    function onTouchMove(e) {
+    function onTouchMove(e: TouchEvent) {
       e.preventDefault();
       if (touchStartY.current === null) return;
       const delta = touchStartY.current - e.touches[0].clientY;
@@ -105,7 +105,7 @@ export default function Curtain() {
       snapCheck();
     }
 
-    function onKeydown(e) {
+    function onKeydown(e: KeyboardEvent) {
       if (['ArrowDown', 'PageDown', ' '].includes(e.key)) {
         e.preventDefault();
         addProgress(90);

@@ -2,11 +2,12 @@ import { useState } from 'react';
 import projectData from '../data/project.json';
 import ExpandCard from './ExpandCard';
 import richText from '../utils/richText';
+import type { Project } from '../types';
 
-const projects = [...projectData].sort((a, b) => b.id - a.id);
+const projects = ([...projectData] as Project[]).sort((a, b) => b.id - a.id);
 
 export default function ProjectsPanel() {
-  const [expandedId, setExpandedId] = useState(null);
+  const [expandedId, setExpandedId] = useState<number | null>(null);
 
   return (
     <div>

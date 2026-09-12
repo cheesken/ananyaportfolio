@@ -9,8 +9,9 @@ import EducationPanel from './components/EducationPanel'
 import ContactModal from './components/ContactModal'
 import menuIcon from './asset/menu1.png'
 import notesData from './data/notes.json'
+import type { TabConfig } from './types'
 
-const allTabs = [
+const allTabs: TabConfig[] = [
   { id: 'home', label: 'Home', bg: '#f0e681', text: '#2E2A22' },
   { id: 'projects', label: 'Projects', bg: '#a5d5e7', text: '#2E2A22' },
   { id: 'experience', label: 'Experience', bg: '#E7B6C5', text: '#2E2A22' },
@@ -26,17 +27,17 @@ const overflowTabs = tabs.slice(2)
 function App() {
   const [activeTab, setActiveTab] = useState('home')
   const [menuOpen, setMenuOpen] = useState(false)
-  const menuRef = useRef(null)
-  const hoverRef = useRef(null)
-  const current = tabs.find(t => t.id === activeTab)
+  const menuRef = useRef<HTMLDivElement>(null)
+  const hoverRef = useRef<HTMLDivElement>(null)
+  const current = tabs.find(t => t.id === activeTab)!
 
   // perforated hover magnify — desktop only
   useEffect(() => {
     const el = hoverRef.current
     if (!el) return
-    function onMove(e) {
-      el.style.setProperty('--mx', e.clientX + 'px')
-      el.style.setProperty('--my', e.clientY + 'px')
+    function onMove(e: MouseEvent) {
+      el!.style.setProperty('--mx', e.clientX + 'px')
+      el!.style.setProperty('--my', e.clientY + 'px')
     }
     window.addEventListener('mousemove', onMove)
     return () => window.removeEventListener('mousemove', onMove)
@@ -45,8 +46,8 @@ function App() {
   // close dropdown on outside click
   useEffect(() => {
     if (!menuOpen) return
-    function handleClick(e) {
-      if (menuRef.current && !menuRef.current.contains(e.target)) {
+    function handleClick(e: Event) {
+      if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
         setMenuOpen(false)
       }
     }
@@ -58,12 +59,12 @@ function App() {
     }
   }, [menuOpen])
 
-  const tabClass = (isActive) =>
+  const tabClass = (isActive: boolean) =>
     `font-['Syne_Mono'] text-[11px] sm:text-xs tracking-[0.06em] uppercase px-4 sm:px-5 py-2 sm:py-2.5 border-none cursor-pointer whitespace-nowrap transition-all duration-150 ${
       isActive ? 'translate-y-0 relative z-20' : 'translate-y-2.5 relative z-0'
     }`
 
-  const tabStyle = (tab) => ({
+  const tabStyle = (tab: TabConfig) => ({
     backgroundColor: tab.bg,
     color: tab.text,
     clipPath: 'polygon(8% 0, 92% 0, 100% 100%, 0% 100%)',

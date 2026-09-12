@@ -1,7 +1,8 @@
 import educationData from '../data/education.json';
 import richText from '../utils/richText';
+import type { Education } from '../types';
 
-const entries = [...educationData].sort((a, b) => b.id - a.id);
+const entries = ([...educationData] as Education[]).sort((a, b) => b.id - a.id);
 
 export default function EducationPanel() {
   return (
