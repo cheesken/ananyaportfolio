@@ -20,9 +20,9 @@
     "role": "Undergraduate Teaching Assistant for CS 354",
     "duration": "Jan 2021 - Apr 2021",
     "description": [
-      "Assisted in CS 354 (C Programming and Computer Systems).",
-      "Guided 300+ undergraduate students through complex 2021 computer systems concepts, including x86-32 assembly language mappings, virtual memory, and cache organization.",
-      "Debugged manual memory corruption during office hours, training students to utilize the GNU Debugger (GDB) to isolate segmentation faults in pointer-heavy C programs.",
+      "Assisted in **CS 354 (C Programming and Computer Systems)**.",
+      "Guided **300+ undergraduate students** through complex 2021 computer systems concepts, including **x86-32 assembly language mappings, virtual memory, and cache organization**.",
+      "Debugged **manual memory corruption** during office hours, training students to utilize the **GNU Debugger (GDB)** to isolate segmentation faults in pointer-heavy C programs.",
       "Assisted students with complex programming assignments, including the implementation of a custom dynamic heap memory allocator (malloc/free) using implicit/explicit free lists.",
       "Collaborated with the 2021 instructional team to proactively identify student roadblocks surrounding stack frame layouts and buffer overflow vulnerabilities."
     ],
@@ -36,9 +36,9 @@
     "role": "Undergraduate Teaching Assistant for CS 540",
     "duration": "Jan 2021 - Apr 2021",
     "description": [
-      "Assisted in CS 540 (Introduction to AI)",
-      "Guided 300+ undergraduate students through core Artificial Intelligence concepts, including machine learning, neural networks, search algorithms, and game theory.",
-      "Debugged complex Python implementations during weekly office hours, helping students resolve logical errors in search heuristics (A*, Minimax) and reinforcement learning models.",
+      "Assisted in **CS 540 (Introduction to AI)**",
+      "Guided ~~300+ undergraduate students~~ through core Artificial Intelligence concepts, including ~~machine learning, neural networks, search algorithms, and game theory.~~",
+      "Debugged complex Python implementations during weekly office hours, helping students resolve ~~logical errors in search heuristics (A*, Minimax) and reinforcement learning models.~~",
       "Collaborated with professors and teaching assistants to evaluate student roadblocks and optimize course delivery for a large-enrollment foundational AI course.",
       "Mentored diverse student teams during coding labs, fostering an inclusive environment that improved retention and confidence in computer science topics."
     ],
