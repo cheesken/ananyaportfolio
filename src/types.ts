@@ -43,3 +43,8 @@ export interface TabConfig {
   bg: string;
   text: string;
 }
+
+export interface LoveItem {
+  label: string;
+  image: string;
+}

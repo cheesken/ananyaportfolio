@@ -1,0 +1,6 @@
+[
+    { "label": "Coffee", "image": "coffee.png" },
+    { "label": "Adventure", "image": "adventure.png" },
+    { "label": "Star Gazing", "image": "star.png" },
+    { "label": "Sushi", "image": "sushi.png" }
+]

@@ -7,6 +7,7 @@ import ExperiencePanel from './components/ExperiencePanel'
 import NotesPanel from './components/NotesPanel'
 import EducationPanel from './components/EducationPanel'
 import ContactModal from './components/ContactModal'
+import LoveTab from './components/LoveTab'
 import menuIcon from './asset/menu1.png'
 import notesData from './data/notes.json'
 import type { TabConfig } from './types'
@@ -102,6 +103,7 @@ function App() {
       />
 
       <ContactModal />
+      <LoveTab />
       <Curtain />
 
       <div className="w-full max-w-[960px] min-h-[80vh]">
