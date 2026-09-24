@@ -5,11 +5,13 @@ import HomePanel from './components/HomePanel'
 import ProjectsPanel from './components/ProjectsPanel'
 import ExperiencePanel from './components/ExperiencePanel'
 import NotesPanel from './components/NotesPanel'
+import ArtPanel from './components/ArtPanel'
 import EducationPanel from './components/EducationPanel'
 import ContactModal from './components/ContactModal'
 import LoveTab from './components/LoveTab'
 import menuIcon from './asset/menu1.png'
 import notesData from './data/notes.json'
+import artData from './data/art.json'
 import type { TabConfig } from './types'
 
 const allTabs: TabConfig[] = [
@@ -18,9 +20,13 @@ const allTabs: TabConfig[] = [
   { id: 'experience', label: 'Experience', bg: '#E7B6C5', text: '#2E2A22' },
   { id: 'education', label: 'Education', bg: '#a6deb0', text: '#2E2A22' },
   { id: 'notes', label: 'Notes', bg: '#cab6db', text: '#2E2A22' },
+  { id: 'art', label: 'Artfolio', bg: '#E7C9A9', text: '#2E2A22' },
 ]
 
-const tabs = allTabs.filter(t => t.id !== 'notes' || notesData.length > 0)
+const tabs = allTabs.filter(t =>
+  (t.id !== 'notes' || notesData.length > 0) &&
+  (t.id !== 'art' || artData.length > 0)
+)
 
 const mobileTabs = tabs.slice(0, 2)
 const overflowTabs = tabs.slice(2)
@@ -186,6 +192,7 @@ function App() {
           {activeTab === 'projects' && <ProjectsPanel />}
           {activeTab === 'experience' && <ExperiencePanel />}
           {activeTab === 'notes' && <NotesPanel />}
+          {activeTab === 'art' && <ArtPanel />}
           {activeTab === 'education' && <EducationPanel />}
         </main>
       </div>

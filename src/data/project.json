@@ -5,7 +5,7 @@
     "summary": "A vintage folder-themed portfolio with interactive perforated-metal effects, scroll curtain, and stamp-styled UI.",
     "tags": ["Frontend", "Full-Stack"],
     "description": [
-      "Designed and built a **skeuomorphic folder-tab interface** with per-section color theming, a scroll-to-reveal wax stamp curtain, and **JSON-driven content architecture** across 5 sections.",
+      "Designed and built a ** folder-tab interface** with per-section color theming, a scroll-to-reveal wax stamp curtain, and **JSON-driven content architecture** across 5 sections.",
       "Engineered an interactive **perforated-metal background** using staggered radial gradients with a **cursor-proximity magnify effect** via CSS mask-image and CSS custom properties.",
       "Implemented **expandable project cards** with embedded YouTube video players, **snap-scroll curtain** with touch/wheel/keyboard input tracking, and fluid responsive typography using **CSS clamp()**.",
       "Integrated **Resend email API** through a **Vercel serverless function** for the contact form, with floating stamp-styled action buttons for GitHub, LinkedIn, and email."
@@ -133,6 +133,20 @@
   },
   {
     "id": 8,
+    "name": "Engram",
+    "summary": "Memory middleware for multi-agent AI systems with CRDT conflict resolution and vector clocks.",
+    "tags": ["AI/ML", "Backend", "Agentic AI"],
+    "description": [
+      "Built a **memory middleware** that sits between agent frameworks and storage layers, solving the **last-write-wins problem** where concurrent writes from multiple agents silently corrupt shared state.",
+      "Implemented **vector clocks** for causal ordering and a **CRDT-based multi-value register** that preserves all conflicting values instead of silently dropping writes, with **5 resolution strategies** including flag-for-human review.",
+      "Engineered **role-based access control** with fnmatch-style wildcard patterns scoping read/write permissions per agent, plus an **immutable append-only audit trail** with time-travel queries via vector clock snapshots.",
+      "Designed **pluggable storage adapters** (in-memory, Redis, ChromaDB, Pinecone) with configurable consistency levels, deployed via **Docker Compose** with a full **pytest test suite**."
+    ],
+    "technologies": ["Python", "FastAPI", "Redis", "Pydantic", "Docker", "pytest"],
+    "github": "https://github.com/cheesken/Engram"
+  },
+  {
+    "id": 9,
     "name": "AMBER: Covert DV Evidence Platform",
     "summary": "Covert evidence-collection app disguised as a meditation timer for DV survivors.",
     "video": "",

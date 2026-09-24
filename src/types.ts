@@ -34,7 +34,9 @@ export interface Note {
   title: string;
   date: string;
   tags?: string[];
-  body: string;
+  body: string[];
+  image?: string;
+  video?: string;
 }
 
 export interface TabConfig {
@@ -42,6 +44,13 @@ export interface TabConfig {
   label: string;
   bg: string;
   text: string;
+}
+
+export interface Art {
+  id: number;
+  image: string;
+  title?: string;
+  passage?: string;
 }
 
 export interface LoveItem {

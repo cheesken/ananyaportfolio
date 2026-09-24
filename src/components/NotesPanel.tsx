@@ -5,6 +5,13 @@ import type { Note } from '../types';
 
 const posts = ([...notesData] as Note[]).sort((a, b) => b.id - a.id);
 
+const imageModules = import.meta.glob('../asset/notes/*.{png,jpg,webp}', { eager: true, query: '?url', import: 'default' }) as Record<string, string>;
+
+function getNoteImage(filename: string): string | undefined {
+  const key = `../asset/notes/${filename}`;
+  return imageModules[key];
+}
+
 function formatDate(dateStr: string) {
   const d = new Date(dateStr + 'T00:00:00');
   return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
@@ -60,14 +67,41 @@ export default function NotesPanel() {
               ) : null
             }
             expandedContent={
-              <div className="mt-3 sm:mt-4">
-                <p
-                  className="text-[clamp(0.78rem,1.7vw,0.9rem)] text-[#2E2A22] leading-relaxed whitespace-pre-line"
-                  style={{ fontFamily: "'Instrument Sans', sans-serif" }}
-                >
-                  {post.body}
-                </p>
-              </div>
+              <>
+                {post.video && (
+                  <div
+                    className="mt-3 sm:mt-4 rounded-lg overflow-hidden border border-[#2E2A22]/10"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    <iframe
+                      src={post.video}
+                      title={post.title}
+                      className="w-full aspect-video"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                    />
+                  </div>
+                )}
+                {post.image && (() => {
+                  const src = getNoteImage(post.image);
+                  return src ? (
+                    <div className="mt-3 sm:mt-4 rounded-lg overflow-hidden border border-[#2E2A22]/10">
+                      <img src={src} alt={post.title} className="w-full object-cover" />
+                    </div>
+                  ) : null;
+                })()}
+                <div className="mt-3 sm:mt-4 flex flex-col gap-3">
+                  {post.body.map((para, i) => (
+                    <p
+                      key={i}
+                      className="text-[clamp(0.78rem,1.7vw,0.9rem)] text-[#2E2A22] leading-relaxed"
+                      style={{ fontFamily: "'Instrument Sans', sans-serif" }}
+                    >
+                      {para}
+                    </p>
+                  ))}
+                </div>
+              </>
             }
           />
         ))}
