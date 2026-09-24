@@ -1,4 +1,5 @@
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef, useEffect, lazy, Suspense } from 'react'
+import { Analytics } from '@vercel/analytics/react'
 import './index.css'
 import Curtain from './components/Curtain'
 import HomePanel from './components/HomePanel'
@@ -8,11 +9,15 @@ import NotesPanel from './components/NotesPanel'
 import ArtPanel from './components/ArtPanel'
 import EducationPanel from './components/EducationPanel'
 import ContactModal from './components/ContactModal'
-import LoveTab from './components/LoveTab'
+import PassportStamps from './components/PassportStamps'
+import VisitorCounter from './components/VisitorCounter'
+import PullDownTab from './components/PullDownTab'
 import menuIcon from './asset/menu1.png'
 import notesData from './data/notes.json'
 import artData from './data/art.json'
 import type { TabConfig } from './types'
+
+const RetroArcade = lazy(() => import('./components/RetroArcade'))
 
 const allTabs: TabConfig[] = [
   { id: 'home', label: 'Home', bg: '#f0e681', text: '#2E2A22' },
@@ -33,10 +38,29 @@ const overflowTabs = tabs.slice(2)
 
 function App() {
   const [activeTab, setActiveTab] = useState('home')
+  const [visitedTabs, setVisitedTabs] = useState<string[]>(['home'])
   const [menuOpen, setMenuOpen] = useState(false)
+  const [arcadeOpen, setArcadeOpen] = useState(false)
   const menuRef = useRef<HTMLDivElement>(null)
+  const clickTimestamps = useRef<number[]>([])
   const hoverRef = useRef<HTMLDivElement>(null)
+  const mainRef = useRef<HTMLElement>(null)
   const current = tabs.find(t => t.id === activeTab)!
+
+  const allVisited = tabs.every(t => visitedTabs.includes(t.id))
+
+  // track visited tabs
+  useEffect(() => {
+    setVisitedTabs(prev => {
+      if (prev.includes(activeTab)) return prev
+      return [...prev, activeTab]
+    })
+  }, [activeTab])
+
+  // scroll panel to top on tab switch
+  useEffect(() => {
+    mainRef.current?.scrollTo({ top: 0, behavior: 'smooth' })
+  }, [activeTab])
 
   // perforated hover magnify — desktop only
   useEffect(() => {
@@ -109,10 +133,11 @@ function App() {
       />
 
       <ContactModal />
-      <LoveTab />
       <Curtain />
+      <VisitorCounter />
+      <PullDownTab />
 
-      <div className="w-full max-w-[960px] min-h-[80vh]">
+      <div className="w-full max-w-[960px] min-h-[80vh] relative">
         {/* Tab nav — desktop: all tabs */}
         <nav className="hidden md:flex gap-1 pl-4">
           {tabs.map(tab => (
@@ -177,6 +202,7 @@ function App() {
 
         {/* Folder body */}
         <main
+          ref={mainRef}
           className="relative z-10 rounded-tr-[20px] rounded-b-[20px] p-6 sm:p-8 md:p-10 lg:p-12 h-[75vh] overflow-y-auto"
           style={{
             backgroundColor: current.bg,
@@ -188,14 +214,45 @@ function App() {
             boxShadow: '0 8px 32px rgba(0,0,0,0.35), 0 2px 0 rgba(255,255,255,0.15) inset',
           }}
         >
-          {activeTab === 'home' && <HomePanel />}
-          {activeTab === 'projects' && <ProjectsPanel />}
-          {activeTab === 'experience' && <ExperiencePanel />}
-          {activeTab === 'notes' && <NotesPanel />}
-          {activeTab === 'art' && <ArtPanel />}
-          {activeTab === 'education' && <EducationPanel />}
+          <div key={activeTab} className="animate-fade-in h-full">
+            {activeTab === 'home' && <HomePanel />}
+            {activeTab === 'projects' && <ProjectsPanel />}
+            {activeTab === 'experience' && <ExperiencePanel />}
+            {activeTab === 'notes' && <NotesPanel />}
+            {activeTab === 'art' && <ArtPanel />}
+            {activeTab === 'education' && <EducationPanel />}
+          </div>
         </main>
+
+        <div className="hidden xl:block">
+          <PassportStamps tabs={tabs} visitedTabs={visitedTabs} allVisited={allVisited} />
+        </div>
+
       </div>
+
+      {/* Secret arcade click zone — desktop only, bottom half of screen */}
+      <div
+        className="hidden md:block fixed left-0 right-0 bottom-0 cursor-default select-none"
+        style={{ top: '50%' }}
+        onClick={() => {
+          const now = Date.now()
+          const ts = clickTimestamps.current
+          ts.push(now)
+          if (ts.length > 5) ts.shift()
+          if (ts.length === 5 && now - ts[0] < 2500) {
+            setArcadeOpen(true)
+            ts.length = 0
+          }
+        }}
+      />
+
+      {arcadeOpen && (
+        <Suspense fallback={null}>
+          <RetroArcade onClose={() => setArcadeOpen(false)} />
+        </Suspense>
+      )}
+
+      <Analytics />
     </div>
   )
 }

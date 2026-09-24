@@ -1,4 +1,5 @@
 import artData from '../data/art.json';
+import ShimmerImage from './ShimmerImage';
 import type { Art } from '../types';
 
 const pieces = ([...artData] as Art[]).sort((a, b) => b.id - a.id);
@@ -17,27 +18,23 @@ export default function ArtPanel() {
         className="text-[clamp(1.8rem,5vw,3rem)] text-[#2E2A22] mb-4 sm:mb-6 md:mb-8"
         style={{ fontFamily: "'DM Serif Display', serif" }}
       >
-        Art
+        Artfolio
       </h1>
 
       <div
         className="gap-3 sm:gap-4"
         style={{ columns: '2 240px' }}
       >
-        {pieces.map((piece) => {
+        {pieces.map((piece, i) => {
           const src = getArtImage(piece.image);
           if (!src) return null;
           return (
             <div
               key={piece.id}
-              className="relative group mb-3 sm:mb-4 break-inside-avoid rounded-lg overflow-hidden border border-[#2E2A22]/10 cursor-default"
-              style={{ boxShadow: '0 2px 8px rgba(0,0,0,0.08)' }}
+              className="relative group mb-3 sm:mb-4 break-inside-avoid rounded-lg overflow-hidden border border-[#2E2A22]/10 cursor-default animate-fade-in-up"
+              style={{ '--i': i, boxShadow: '0 2px 8px rgba(0,0,0,0.08)' } as React.CSSProperties}
             >
-              <img
-                src={src}
-                alt={piece.title || 'Artwork'}
-                className="w-full block"
-              />
+              <ShimmerImage src={src} alt={piece.title || 'Artwork'} className="w-full block transition-transform duration-500 ease-out group-hover:scale-[1.75]" />
 
               {(piece.title || piece.passage) && (
                 <div className="absolute inset-0 bg-[#2E2A22]/70 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4 sm:p-5">

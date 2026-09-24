@@ -15,8 +15,12 @@ export default function EducationPanel() {
       </h1>
 
       <div className="space-y-4 sm:space-y-6">
-        {entries.map(entry => (
-          <div key={entry.id}>
+        {entries.map((entry, i) => (
+          <div
+            key={entry.id}
+            className="animate-fade-in-up"
+            style={{ '--i': i } as React.CSSProperties}
+          >
             <h2
               className="text-[clamp(1.5rem,4vw,2rem)] text-[#2E2A22] underline decoration-dotted underline-offset-4"
               style={{ fontFamily: "'Syne', sans-serif" }}

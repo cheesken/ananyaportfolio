@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import notesData from '../data/notes.json';
 import ExpandCard from './ExpandCard';
+import ShimmerImage from './ShimmerImage';
 import type { Note } from '../types';
 
 const posts = ([...notesData] as Note[]).sort((a, b) => b.id - a.id);
@@ -30,9 +31,10 @@ export default function NotesPanel() {
       </h1>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
-        {posts.map((post) => (
+        {posts.map((post, i) => (
           <ExpandCard
             key={post.id}
+            index={i}
             isExpanded={expandedId === post.id}
             onToggle={() => setExpandedId(expandedId === post.id ? null : post.id)}
             header={
@@ -86,7 +88,7 @@ export default function NotesPanel() {
                   const src = getNoteImage(post.image);
                   return src ? (
                     <div className="mt-3 sm:mt-4 rounded-lg overflow-hidden border border-[#2E2A22]/10">
-                      <img src={src} alt={post.title} className="w-full object-cover" />
+                      <ShimmerImage src={src} alt={post.title} className="w-full object-cover" />
                     </div>
                   ) : null;
                 })()}

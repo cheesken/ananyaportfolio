@@ -8,3 +8,230 @@ body {
   margin: 0;
   -webkit-font-smoothing: antialiased;
 }
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.4s ease both;
+  animation-delay: calc(var(--i, 0) * 60ms);
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.25s ease both;
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.skeleton-shimmer {
+  background: linear-gradient(
+    90deg,
+    rgba(46, 42, 34, 0.06) 25%,
+    rgba(46, 42, 34, 0.12) 50%,
+    rgba(46, 42, 34, 0.06) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s ease-in-out infinite;
+}
+
+/* ── Stamp animation for award cards ── */
+@keyframes stampIn {
+  0%   { transform: scale(2.5) rotate(15deg); opacity: 0; }
+  60%  { transform: scale(0.9) rotate(5deg);  opacity: 1; }
+  80%  { transform: scale(1.05) rotate(4deg); }
+  100% { transform: scale(1) rotate(5deg);    opacity: 1; }
+}
+
+.award-stamp {
+  animation: stampIn 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: 0.2s;
+}
+
+/* ── Handwriting reveal ── */
+@keyframes handwrite {
+  from { clip-path: inset(0 100% 0 0); }
+  to   { clip-path: inset(0 0 0 0); }
+}
+
+.handwrite {
+  animation: handwrite 1.4s cubic-bezier(0.22, 0.6, 0.36, 1) both;
+  animation-delay: 0.3s;
+}
+
+/* ── Heart burst easter egg ── */
+
+/* Outer: steady rightward sweep + continuous rotation + fade */
+@keyframes heartDrift {
+  from {
+    transform: translate(0, 0) rotate(0deg);
+    opacity: var(--opacity);
+  }
+  to {
+    transform: translate(var(--drift), var(--spread)) rotate(var(--rot));
+    opacity: 0;
+  }
+}
+
+/* Inner: smooth continuous vertical bobbing */
+@keyframes heartBob {
+  0%, 100% { transform: translateY(calc(var(--wave) * -1)); }
+  50%      { transform: translateY(var(--wave)); }
+}
+
+.heart-drift {
+  position: absolute;
+  pointer-events: none;
+  animation: heartDrift var(--dur) ease-out forwards;
+  animation-delay: var(--delay);
+  opacity: 0;
+}
+
+.heart-bob {
+  display: inline-block;
+  font-size: var(--size);
+  color: #2E2A22;
+  animation: heartBob var(--bob-dur) ease-in-out infinite;
+}
+
+/* The text heart lifts off and joins the gust */
+@keyframes heartLiftOff {
+  0% {
+    opacity: 1;
+    transform: translate(0, 0) rotate(0deg) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(120px, -20px) rotate(15deg) scale(0.55);
+  }
+}
+
+.heart-liftoff {
+  display: inline-block;
+  animation: heartLiftOff 1s cubic-bezier(0.16, 0.7, 0.3, 1) forwards;
+  animation-delay: 100ms;
+}
+
+/* ── Passport stamps (tab visit tracker) ── */
+@keyframes passportStampIn {
+  0%   { transform: scale(2.2) rotate(var(--stamp-rot, 0deg)); opacity: 0; }
+  55%  { transform: scale(0.92) rotate(var(--stamp-rot, 0deg)); opacity: 1; }
+  78%  { transform: scale(1.04) rotate(var(--stamp-rot, 0deg)); }
+  100% { transform: scale(1) rotate(var(--stamp-rot, 0deg)); opacity: 1; }
+}
+
+.passport-stamp {
+  animation: passportStampIn 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: calc(var(--stamp-i, 0) * 100ms);
+}
+
+@keyframes passportStampGold {
+  0%   { transform: scale(2.8) rotate(-3deg); opacity: 0; }
+  50%  { transform: scale(0.9) rotate(-3deg); opacity: 1; }
+  72%  { transform: scale(1.06) rotate(-3deg); }
+  100% { transform: scale(1) rotate(-3deg); opacity: 1; }
+}
+
+.passport-stamp-gold {
+  animation: passportStampGold 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: 0.15s;
+}
+
+/* ── Sticker peel easter egg ── */
+@keyframes stickerPeel {
+  0%   { transform: perspective(800px) rotateX(0deg); }
+  100% { transform: perspective(800px) rotateX(60deg) scale(0.95); }
+}
+
+.sticker-peel {
+  animation: stickerPeel 0.6s cubic-bezier(0.22, 0.6, 0.36, 1) forwards;
+  transform-origin: center bottom;
+}
+
+@keyframes stickerUnpeel {
+  0%   { transform: perspective(800px) rotateX(60deg) scale(0.95); }
+  100% { transform: perspective(800px) rotateX(0deg); }
+}
+
+.sticker-unpeel {
+  animation: stickerUnpeel 0.5s cubic-bezier(0.22, 0.6, 0.36, 1) forwards;
+  transform-origin: center bottom;
+}
+
+@keyframes peelReveal {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.peel-message {
+  animation: peelReveal 0.4s ease 0.2s both;
+}
+
+/* ── Secret retro arcade ── */
+@keyframes arcadeSlideUp {
+  from { transform: translateY(40px); opacity: 0; }
+  to   { transform: translateY(0); opacity: 1; }
+}
+
+.arcade-enter {
+  animation: arcadeSlideUp 0.4s cubic-bezier(0.22, 0.6, 0.36, 1) both;
+}
+
+.crt-lines {
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 255, 65, 0.03) 2px,
+    rgba(0, 255, 65, 0.03) 4px
+  );
+}
+
+/* Farewell text: fades in, holds, then fades out */
+@keyframes crtFarewell {
+  0%   { opacity: 0; transform: scale(0.9); }
+  15%  { opacity: 1; transform: scale(1); }
+  70%  { opacity: 1; transform: scale(1); }
+  100% { opacity: 0; transform: scale(0.95); }
+}
+
+.crt-farewell {
+  animation: crtFarewell 1.4s cubic-bezier(0.22, 0.6, 0.36, 1) both;
+}
+
+/* CRT power-off: shrinks to horizontal line, then dot, then gone */
+@keyframes crtShutdown {
+  0%   { transform: scale(1, 1); opacity: 1; filter: brightness(1); }
+  40%  { transform: scale(1.02, 0.01); opacity: 1; filter: brightness(2); }
+  70%  { transform: scale(0.08, 0.008); opacity: 0.8; filter: brightness(3); }
+  85%  { transform: scale(0.02, 0.02); opacity: 0.6; filter: brightness(4); }
+  100% { transform: scale(0, 0); opacity: 0; filter: brightness(0); }
+}
+
+.crt-shutdown {
+  animation: crtShutdown 0.6s cubic-bezier(0.4, 0, 1, 1) 1.2s both;
+}
+
+@keyframes backdropFade {
+  0%, 90% { opacity: 1; }
+  100%    { opacity: 0; }
+}
+
+.crt-backdrop-fade {
+  animation: backdropFade 1.8s ease both;
+}

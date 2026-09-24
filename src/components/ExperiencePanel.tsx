@@ -20,8 +20,12 @@ export default function ExperiencePanel() {
         <div className="absolute left-0 top-2 bottom-2 w-px bg-[#2E2A22] opacity-30" />
 
         <div className="space-y-5 sm:space-y-7 md:space-y-8">
-          {entries.map((entry) => (
-            <div key={entry.id} className="relative pl-5 sm:pl-7 md:pl-8">
+          {entries.map((entry, i) => (
+            <div
+              key={entry.id}
+              className="relative pl-5 sm:pl-7 md:pl-8 animate-fade-in-up"
+              style={{ '--i': i } as React.CSSProperties}
+            >
               {/* Dot on timeline */}
               <div className="absolute left-0 top-[0.55rem] w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-[#2E2A22] -translate-x-[calc(50%-0.5px)]" />
 

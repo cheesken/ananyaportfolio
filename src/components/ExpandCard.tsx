@@ -8,9 +8,10 @@ interface ExpandCardProps {
   expandedContent?: ReactNode;
   headerAction?: ReactNode;
   colSpan?: number;
+  index?: number;
 }
 
-export default function ExpandCard({ isExpanded, onToggle, header, pills, expandedContent, headerAction, colSpan = 3 }: ExpandCardProps) {
+export default function ExpandCard({ isExpanded, onToggle, header, pills, expandedContent, headerAction, colSpan = 3, index = 0 }: ExpandCardProps) {
   const contentRef = useRef<HTMLDivElement>(null);
   const [height, setHeight] = useState(0);
   const [shouldShow, setShouldShow] = useState(false);
@@ -54,15 +55,27 @@ export default function ExpandCard({ isExpanded, onToggle, header, pills, expand
   return (
     <div
       className={`
-        rounded-lg cursor-pointer
+        rounded-lg cursor-pointer animate-fade-in-up
         transition-all duration-300 ease-in-out
         ${isExpanded
           ? `${spanClass} bg-[#E5D8BB]`
-          : 'col-span-1 bg-[#E5D8BB]/70 hover:bg-[#E5D8BB] hover:-translate-y-0.5 hover:shadow-md'
+          : 'col-span-1 bg-[#E5D8BB]/70 hover:bg-[#E5D8BB] hover:shadow-md'
         }
       `}
-      style={{ boxShadow: isExpanded ? '0 4px 20px rgba(0,0,0,0.08)' : undefined }}
+      style={{
+        '--i': index,
+        perspective: '600px',
+        boxShadow: isExpanded ? '0 4px 20px rgba(0,0,0,0.08)' : undefined,
+      } as React.CSSProperties}
       onClick={onToggle}
+      onMouseEnter={(e) => {
+        if (!isExpanded) {
+          e.currentTarget.style.transform = 'translateY(-4px) rotateX(2deg)';
+        }
+      }}
+      onMouseLeave={(e) => {
+        e.currentTarget.style.transform = '';
+      }}
     >
       <div className="p-3 sm:p-4 md:p-5">
         {/* Header + expand indicator */}
