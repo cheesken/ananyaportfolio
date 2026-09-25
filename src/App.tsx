@@ -214,7 +214,7 @@ function App() {
             boxShadow: '0 8px 32px rgba(0,0,0,0.35), 0 2px 0 rgba(255,255,255,0.15) inset',
           }}
         >
-          <div key={activeTab} className="animate-fade-in h-full">
+          <div key={activeTab} className={`animate-fade-in ${activeTab === 'home' ? 'h-full' : 'pb-2'}`}>
             {activeTab === 'home' && <HomePanel />}
             {activeTab === 'projects' && <ProjectsPanel />}
             {activeTab === 'experience' && <ExperiencePanel />}
