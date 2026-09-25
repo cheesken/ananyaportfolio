@@ -1,5 +1,6 @@
 import { useState, useMemo, useCallback } from 'react';
 import data from '../data/currently.json';
+import ropeEnd from '../asset/rope end.png';
 
 const quote = data.quotes[Math.floor(Math.random() * data.quotes.length)];
 
@@ -17,7 +18,7 @@ export default function PullDownTab() {
           flexDirection: 'column',
           alignItems: 'center',
           // When closed, slide up so only the rod handle peeks out
-          transform: open ? 'translateY(0)' : 'translateY(calc(-100% + 48px))',
+          transform: open ? 'translateY(0)' : 'translateY(calc(-100% + 99px))',
           transition: 'transform 0.5s cubic-bezier(0.22, 0.6, 0.36, 1)',
         }}
       >
@@ -170,35 +171,15 @@ export default function PullDownTab() {
           </div>
           {/* Rope */}
           <div className="flex justify-center">
-            <div
+            <img
+              src={ropeEnd}
+              alt=""
               style={{
-                width: 3,
-                height: 28,
-                borderRadius: 1.5,
-                background: `
-                  repeating-linear-gradient(
-                    180deg,
-                    #B89E70 0px,
-                    #A08960 2px,
-                    #8B7750 3px,
-                    #B89E70 5px
-                  )
-                `,
-                boxShadow: '1px 0 1px rgba(0,0,0,0.15), -0.5px 0 0.5px rgba(255,255,255,0.1)',
+                width: 34,
+                height: 'auto',
+                filter: 'drop-shadow(0 2px 3px rgba(0,0,0,0.3))',
               }}
-            />
-          </div>
-          {/* Tassel knot */}
-          <div className="flex justify-center">
-            <div
-              style={{
-                width: 8,
-                height: 8,
-                borderRadius: '50%',
-                background: 'radial-gradient(circle at 40% 35%, #C4A878, #8B7355)',
-                boxShadow: '0 2px 4px rgba(0,0,0,0.3)',
-                border: '0.5px solid rgba(0,0,0,0.1)',
-              }}
+              draggable={false}
             />
           </div>
         </button>
