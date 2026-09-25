@@ -2,7 +2,7 @@
   {
     "id": 1,
     "school": "University of Wisconsin-Madison",
-    "degree": "Bachelor of Science in Computer Science",
+    "degree": "Bachelors of Science in Computer Science",
     "relevantCourses": [
       "CS 200: Programming I",
       "CS 240: Discrete Mathematics",
@@ -25,7 +25,7 @@
   {
     "id": 2,
     "school": "San Jose State University",
-    "degree": "Master of Science in Software Engineering",
+    "degree": "Masters of Science in Software Engineering",
     "relevantCourses": [
       "CMPE 257:Machine Learning",
       "CMPE 258: Deep Learning",
