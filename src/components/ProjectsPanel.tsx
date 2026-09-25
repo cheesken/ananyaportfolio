@@ -3,23 +3,100 @@ import projectData from '../data/project.json';
 import ExpandCard from './ExpandCard';
 import richText from '../utils/richText';
 import type { Project } from '../types';
+import settingIcon from '../asset/setting.png';
+import circleImg from '../asset/circle.png';
 
 const projects = ([...projectData] as Project[]).sort((a, b) => b.id - a.id);
+const allTags = Array.from(new Set(projects.flatMap(p => p.tags || [])));
 
 export default function ProjectsPanel() {
   const [expandedId, setExpandedId] = useState<number | null>(null);
+  const [filterOpen, setFilterOpen] = useState(false);
+  const [activeTag, setActiveTag] = useState<string | null>(null);
+
+  const filtered = activeTag
+    ? projects.filter(p => p.tags?.includes(activeTag))
+    : projects;
 
   return (
     <div>
-      <h1
-        className="text-[clamp(1.8rem,5vw,3rem)] text-[#2E2A22] mb-4 sm:mb-6 md:mb-8"
-        style={{ fontFamily: "'DM Serif Display', serif" }}
-      >
-        Projects
-      </h1>
+      <div className="flex items-center justify-between mb-4 sm:mb-6 md:mb-8">
+        <h1
+          className="text-[clamp(1.8rem,5vw,3rem)] text-[#2E2A22]"
+          style={{ fontFamily: "'DM Serif Display', serif" }}
+        >
+          Projects
+        </h1>
+        <div className="relative" style={{ width: 50, height: 50 }}>
+          {/* "Filter" label + arrow */}
+          <span
+            className="absolute -top-7 left-1/2 -translate-x-1/2 text-white/60 whitespace-nowrap select-none pointer-events-none hidden sm:block"
+            style={{ fontFamily: "'Caveat', cursive", fontSize: 18 }}
+          >
+            Filter
+          </span>
+          <button
+            onClick={() => setFilterOpen(o => !o)}
+            className="cursor-pointer bg-transparent border-none p-0 transition-transform hover:scale-125 relative w-full h-full"
+            aria-label="Filter projects"
+            style={{ outline: 'none' }}
+          >
+            <img
+              src={circleImg}
+              alt=""
+              className="absolute inset-0 w-full h-full"
+              style={{ opacity: 0.55 }}
+              draggable={false}
+            />
+            <img
+              src={settingIcon}
+              alt=""
+              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+              style={{
+                width: 16,
+                height: 16,
+                opacity: filterOpen ? 1 : 0.5,
+                transition: 'opacity 0.2s',
+              }}
+              draggable={false}
+            />
+          </button>
+        </div>
+      </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
-        {projects.map((project, i) => (
+      {/* Filter tags */}
+      {filterOpen && (
+        <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-4 sm:mb-6 animate-fade-in-up" style={{ '--i': 0 } as React.CSSProperties}>
+          <button
+            onClick={() => setActiveTag(null)}
+            className={`cursor-pointer border-none rounded-full px-3 py-1 text-[clamp(0.65rem,1.4vw,0.78rem)] transition-all ${
+              activeTag === null
+                ? 'bg-[#2E2A22] text-[#F7F2E7]'
+                : 'bg-[#2E2A22]/10 text-[#2E2A22] hover:bg-[#2E2A22]/20'
+            }`}
+            style={{ fontFamily: "'Instrument Sans', sans-serif" }}
+          >
+            All
+          </button>
+          {allTags.map(tag => (
+            <button
+              key={tag}
+              onClick={() => setActiveTag(prev => prev === tag ? null : tag)}
+              className={`cursor-pointer border-none rounded-full px-3 py-1 text-[clamp(0.65rem,1.4vw,0.78rem)] transition-all ${
+                activeTag === tag
+                  ? 'bg-[#2E2A22] text-[#F7F2E7]'
+                  : 'bg-[#2E2A22]/10 text-[#2E2A22] hover:bg-[#2E2A22]/20'
+              }`}
+              style={{ fontFamily: "'Instrument Sans', sans-serif" }}
+            >
+              {tag}
+            </button>
+          ))}
+        </div>
+      )}
+
+      <div key={activeTag ?? '__all'} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
+        {filtered.map((project, i) => (
           <ExpandCard
             key={project.id}
             index={i}
@@ -54,9 +131,9 @@ export default function ProjectsPanel() {
             pills={
               project.technologies && project.technologies.length > 0 ? (
                 <div className="flex flex-wrap gap-1 sm:gap-1.5 mt-2 sm:mt-3">
-                  {project.technologies.slice(0, expandedId === project.id ? undefined : 4).map((tech, i) => (
+                  {project.technologies.slice(0, expandedId === project.id ? undefined : 4).map((tech, j) => (
                     <span
-                      key={i}
+                      key={j}
                       className="text-[clamp(0.58rem,1.1vw,0.68rem)] text-[#2E2A22] bg-[#2E2A22]/10 px-1.5 sm:px-2 py-0.5 rounded-full"
                       style={{ fontFamily: "'Instrument Sans', sans-serif" }}
                     >
@@ -125,8 +202,8 @@ export default function ProjectsPanel() {
                       className="grid grid-cols-1 gap-y-1 sm:gap-y-1.5 list-disc pl-3 sm:pl-4 text-[clamp(0.75rem,1.6vw,0.88rem)] text-[#2E2A22] text-justify"
                       style={{ fontFamily: "'Instrument Sans', sans-serif" }}
                     >
-                      {project.description.map((item, i) => (
-                        <li key={i}>{richText(item)}</li>
+                      {project.description.map((item, j) => (
+                        <li key={j}>{richText(item)}</li>
                       ))}
                     </ul>
                   </div>

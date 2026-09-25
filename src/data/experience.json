@@ -3,7 +3,7 @@
     "id": 1,
     "company": "University of Wisconsin-Madison",
     "team" : "Division of Information Technology",
-    "tags": ["DevOps", "Integration", "Cloud"],
+    "tags": ["DevOps", "Cloud"],
     "role": "Enterprise Integration Intern",
     "duration": "Feb 2021 - Mar 2021",
     "description": [
@@ -16,7 +16,7 @@
     "id": 2,
     "company": "University of Wisconsin-Madison",
     "team" : "Professor Michael Doescher",
-    "tags": ["Operating Systems"],
+    "tags": ["Operating Systems", "Teaching Assistant"],
     "role": "Undergraduate Teaching Assistant for CS 354",
     "duration": "Jan 2021 - Apr 2021",
     "description": [
@@ -32,7 +32,7 @@
     "id": 3,
     "company": "University of Wisconsin-Madison",
     "team" : "Professor Sharon Li and Professor Fred Sala",
-    "tags": ["AI/ML"],
+    "tags": ["AI/ML", "Teaching Assistant"],
     "role": "Undergraduate Teaching Assistant for CS 540",
     "duration": "Jan 2021 - Apr 2021",
     "description": [
@@ -48,7 +48,7 @@
     "id": 4,
     "company": "NetApp",
     "team" : "RAID, ONTAP",
-    "tags": ["Backend", "Systems Engineering", "Operating Systems"],
+    "tags": ["Backend", "Operating Systems"],
     "role": "Software Engineer Intern",
     "duration": "May 2021 - Dec 2021",
     "description": [
@@ -63,7 +63,7 @@
     "id": 5,
     "company": "NetApp",
     "team" : "RAID, ONTAP",
-    "tags": ["Backend", "Systems Engineering", "Operating Systems"],
+    "tags": ["Backend", "Operating Systems"],
     "role": "Software Engineer",
     "duration": "Feb 2022 - Jan 2025",
     "description": [
@@ -77,7 +77,7 @@
     "id": 6,
     "company": "Amazon",
     "team" : "SageMaker Unified Studio",
-    "tags": ["Backend", "Systems Engineering", "Operating Systems"],
+    "tags": ["Full Stack", "Cloud", "Backend"],
     "role": "Software Engineer Intern",
     "duration": "May 2026 - Aug 2026",
     "description": [
