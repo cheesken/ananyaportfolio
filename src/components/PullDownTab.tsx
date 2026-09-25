@@ -1,4 +1,4 @@
-import { useState, useMemo, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 import data from '../data/currently.json';
 import ropeEnd from '../asset/rope end.png';
 
@@ -17,8 +17,11 @@ function getNextQuote(): string {
 
 export default function PullDownTab() {
   const [open, setOpen] = useState(false);
-  const randomQuote = useMemo(() => getNextQuote(), []);
-  const toggle = useCallback(() => setOpen(prev => !prev), []);
+  const [randomQuote, setRandomQuote] = useState(() => getNextQuote());
+  const toggle = useCallback(() => {
+    if (!open) setRandomQuote(getNextQuote()); // new quote each time it opens
+    setOpen(o => !o);
+  }, [open]);
 
   return (
     <div className="fixed top-0 right-5 z-50 hidden md:flex flex-col items-end">
