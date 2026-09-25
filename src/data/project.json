@@ -3,12 +3,13 @@
     "id": 1,
     "name": "This Website!",
     "summary": "A vintage folder-themed portfolio with interactive perforated-metal effects, scroll curtain, and stamp-styled UI.",
+    "video" : "https://www.youtube.com/embed/1A7WlPh8etE",
     "tags": ["Frontend", "Full-Stack"],
     "description": [
-      "Designed and built a ** folder-tab interface** with per-section color theming, a scroll-to-reveal wax stamp curtain, and **JSON-driven content architecture** across 5 sections.",
-      "Engineered an interactive **perforated-metal background** using staggered radial gradients with a **cursor-proximity magnify effect** via CSS mask-image and CSS custom properties.",
-      "Implemented **expandable project cards** with embedded YouTube video players, **snap-scroll curtain** with touch/wheel/keyboard input tracking, and fluid responsive typography using **CSS clamp()**.",
-      "Integrated **Resend email API** through a **Vercel serverless function** for the contact form, with floating stamp-styled action buttons for GitHub, LinkedIn, and email."
+      "Designed and built a **folder-tab interface** with per-section color theming, a scroll-to-reveal wax stamp curtain, and **JSON-driven content architecture** across 6 sections.",
+      "Engineered an interactive **perforated-metal background** with a **cursor-proximity magnify effect** via CSS mask-image, a **90s ghost cursor trail** rendered on a canvas overlay, and **retro Windows XP-style custom cursors**.",
+      "Implemented hidden interactive easter eggs including a **sticker peel reveal**, **heart burst particle animation**, a **secret retro arcade** (Snake, Pong, Breakout, Flappy Bird) triggered by rapid clicks, and a **pull-down \"currently\" tab** with uniform random quote rotation.",
+      "Integrated **Resend email API** through a **Vercel serverless function** for the contact form, with **passport stamp tracking**, a **retro visitor counter**, and floating stamp-styled action buttons."
     ],
     "technologies": ["React", "Vite", "Tailwind CSS", "TypeScript", "Vercel", "Resend API"],
     "github": "https://github.com/cheesken/ananyaportfolio"
