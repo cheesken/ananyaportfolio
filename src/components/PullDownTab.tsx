@@ -2,11 +2,22 @@ import { useState, useMemo, useCallback } from 'react';
 import data from '../data/currently.json';
 import ropeEnd from '../asset/rope end.png';
 
-const quote = data.quotes[Math.floor(Math.random() * data.quotes.length)];
+// Random pick, uniformly distributed — always pick from least-shown quotes
+const COUNTS_KEY = 'quote-counts';
+function getNextQuote(): string {
+  let counts: Record<string, number> = {};
+  try { counts = JSON.parse(sessionStorage.getItem(COUNTS_KEY) || '{}'); } catch { /* ignore */ }
+  const min = Math.min(...data.quotes.map(q => counts[q] || 0));
+  const pool = data.quotes.filter(q => (counts[q] || 0) === min);
+  const pick = pool[Math.floor(Math.random() * pool.length)];
+  counts[pick] = (counts[pick] || 0) + 1;
+  sessionStorage.setItem(COUNTS_KEY, JSON.stringify(counts));
+  return pick;
+}
 
 export default function PullDownTab() {
   const [open, setOpen] = useState(false);
-  const randomQuote = useMemo(() => quote, []);
+  const randomQuote = useMemo(() => getNextQuote(), []);
   const toggle = useCallback(() => setOpen(prev => !prev), []);
 
   return (
