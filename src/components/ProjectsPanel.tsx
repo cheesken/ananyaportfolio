@@ -122,7 +122,7 @@ export default function ProjectsPanel() {
                 {project.description && project.description.length > 0 && (
                   <div className="mt-3 sm:mt-4 ml-2 sm:ml-3">
                     <ul
-                      className="grid grid-cols-1 gap-y-1 sm:gap-y-1.5 list-disc pl-3 sm:pl-4 text-[clamp(0.75rem,1.6vw,0.88rem)] text-[#2E2A22]"
+                      className="grid grid-cols-1 gap-y-1 sm:gap-y-1.5 list-disc pl-3 sm:pl-4 text-[clamp(0.75rem,1.6vw,0.88rem)] text-[#2E2A22] text-justify"
                       style={{ fontFamily: "'Instrument Sans', sans-serif" }}
                     >
                       {project.description.map((item, i) => (

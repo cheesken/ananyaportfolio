@@ -74,7 +74,7 @@ export default function ExperiencePanel() {
               {entry.description && entry.description.length > 0 && (
                 <div className="ml-3 sm:ml-4 md:ml-5 mt-1.5 sm:mt-2">
                   <ul
-                    className="grid grid-cols-1 gap-y-0.5 sm:gap-y-1 list-disc pl-3 sm:pl-4 text-[clamp(0.75rem,1.6vw,0.88rem)] text-[#2E2A22]"
+                    className="grid grid-cols-1 gap-y-0.5 sm:gap-y-1 list-disc pl-3 sm:pl-4 text-[clamp(0.75rem,1.6vw,0.88rem)] text-[#2E2A22] text-justify"
                     style={{ fontFamily: "'Instrument Sans', sans-serif" }}
                   >
                     {entry.description.map((item, i) => (

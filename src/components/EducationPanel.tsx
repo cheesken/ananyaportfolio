@@ -42,7 +42,7 @@ export default function EducationPanel() {
                   Relevant Courses
                 </h4>
                 <ul
-                  className="mt-1 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-4 sm:gap-x-6 md:gap-x-8 lg:gap-x-10 gap-y-1 list-disc pl-4 text-[clamp(0.8rem,1.8vw,0.95rem)] text-[#2E2A22]"
+                  className="mt-1 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-4 sm:gap-x-6 md:gap-x-8 lg:gap-x-10 gap-y-1 list-disc pl-4 text-[clamp(0.8rem,1.8vw,0.95rem)] text-[#2E2A22] text-justify"
                   style={{ fontFamily: "'Instrument Sans', sans-serif" }}
                 >
                   {entry.relevantCourses.map((course, i) => (
@@ -60,7 +60,7 @@ export default function EducationPanel() {
                   Achievements
                 </h4>
                 <ul
-                  className="mt-1 grid grid-cols-1 gap-y-1 list-disc pl-4 text-[clamp(0.8rem,1.8vw,0.95rem)] text-[#2E2A22]"
+                  className="mt-1 grid grid-cols-1 gap-y-1 list-disc pl-4 text-[clamp(0.8rem,1.8vw,0.95rem)] text-[#2E2A22] text-justify"
                   style={{ fontFamily: "'Instrument Sans', sans-serif" }}
                 >
                   {entry.achievements.map((item, i) => (
