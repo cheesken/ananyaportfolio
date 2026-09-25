@@ -108,7 +108,7 @@ export default function HomePanel() {
                   className="peel-message text-[#800f18] text-center text-xl font-bold px-2"
                   style={{ fontFamily: "'Caveat', cursive" }}
                 >
-                  Tech is only one<br />part of me :3
+                  baa baa<br />black sheep
                 </p>
               </div>
             )}
@@ -137,7 +137,7 @@ export default function HomePanel() {
                   className="peel-message text-[#800f18] text-xl font-bold text-center"
                   style={{ fontFamily: "'Caveat', cursive" }}
                 >
-                  Tech is only one<br />part of me :3
+                  baa baa<br />black sheep
                 </p>
               </div>
             )}
