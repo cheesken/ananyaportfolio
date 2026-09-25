@@ -161,7 +161,7 @@ function App() {
   }, [menuOpen])
 
   const tabClass = (isActive: boolean) =>
-    `font-['Syne_Mono'] text-[11px] sm:text-xs tracking-[0.06em] uppercase px-4 sm:px-5 py-2 sm:py-2.5 border-none cursor-pointer whitespace-nowrap transition-all duration-150 ${
+    `font-['Syne_Mono'] text-[11px] sm:text-xs tracking-[0.06em] uppercase px-4 sm:px-5 py-2 sm:py-2.5 border-none cursor-pointer whitespace-nowrap transition-all duration-150 hover:scale-110 origin-bottom ${
       isActive ? 'translate-y-0 relative z-20' : 'translate-y-2.5 relative z-0'
     }`
 
