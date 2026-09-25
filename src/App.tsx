@@ -16,7 +16,6 @@ import menuIcon from './asset/menu1.png'
 import notesData from './data/notes.json'
 import artData from './data/art.json'
 import type { TabConfig } from './types'
-
 const RetroArcade = lazy(() => import('./components/RetroArcade'))
 
 const allTabs: TabConfig[] = [
@@ -45,9 +44,22 @@ function App() {
   const clickTimestamps = useRef<number[]>([])
   const hoverRef = useRef<HTMLDivElement>(null)
   const mainRef = useRef<HTMLElement>(null)
+  const arcadeOpenRef = useRef(false)
   const current = tabs.find(t => t.id === activeTab)!
 
   const allVisited = tabs.every(t => visitedTabs.includes(t.id))
+
+  // Neon green cursor when arcade is open — with smooth flash transition
+  const [cursorFlash, setCursorFlash] = useState(false)
+  useEffect(() => {
+    arcadeOpenRef.current = arcadeOpen
+    setCursorFlash(true)
+    const t1 = setTimeout(() => {
+      document.body.classList.toggle('arcade-cursor', arcadeOpen)
+    }, 150)
+    const t2 = setTimeout(() => setCursorFlash(false), 300)
+    return () => { clearTimeout(t1); clearTimeout(t2); document.body.classList.remove('arcade-cursor') }
+  }, [arcadeOpen])
 
   // track visited tabs
   useEffect(() => {
@@ -92,6 +104,11 @@ function App() {
     let interval = Math.floor(Math.random() * (MAX_DELAY - MIN_DELAY + 1)) + MIN_DELAY
 
     function onMouseMove(e: MouseEvent) {
+      if (arcadeOpenRef.current) {
+        particles.length = 0
+        ctx.clearRect(0, 0, width, height)
+        return
+      }
       if (lastAdd + interval > Date.now()) return
       lastAdd = Date.now()
       interval = Math.floor(Math.random() * (MAX_DELAY - MIN_DELAY + 1)) + MIN_DELAY
@@ -345,6 +362,17 @@ function App() {
         <Suspense fallback={null}>
           <RetroArcade onClose={() => setArcadeOpen(false)} />
         </Suspense>
+      )}
+
+      {/* Cursor transition flash */}
+      {cursorFlash && (
+        <div
+          className="fixed inset-0 pointer-events-none z-[99999999999]"
+          style={{
+            background: arcadeOpen ? 'rgba(57,255,20,0.08)' : 'rgba(255,255,255,0.08)',
+            animation: 'cursorFlash 300ms ease-out forwards',
+          }}
+        />
       )}
 
       <Analytics />
