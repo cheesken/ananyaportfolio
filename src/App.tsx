@@ -202,6 +202,31 @@ function App() {
         }}
       />
 
+      {/* India flag — large screens only */}
+      <div className="hidden xl:block fixed top-4 right-5 z-40">
+        <svg width="36" height="25" viewBox="0 0 36 25" style={{ filter: 'drop-shadow(0 1px 3px rgba(0,0,0,0.3))' }}>
+          <rect x="0" y="0" width="36" height="8.33" rx="1" fill="#FF9933" />
+          <rect x="0" y="8.33" width="36" height="8.34" fill="#FFFFFF" />
+          <rect x="0" y="16.67" width="36" height="8.33" rx="1" fill="#138808" />
+          <circle cx="18" cy="12.5" r="3.2" fill="none" stroke="#000080" strokeWidth="0.5" />
+          {Array.from({ length: 24 }, (_, i) => {
+            const angle = (i * 15 * Math.PI) / 180;
+            return (
+              <line
+                key={i}
+                x1={18}
+                y1={12.5}
+                x2={18 + Math.cos(angle) * 3}
+                y2={12.5 + Math.sin(angle) * 3}
+                stroke="#000080"
+                strokeWidth="0.3"
+              />
+            );
+          })}
+          <circle cx="18" cy="12.5" r="0.6" fill="#000080" />
+        </svg>
+      </div>
+
       <ContactModal />
       <Curtain />
       <VisitorCounter />
