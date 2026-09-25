@@ -67,9 +67,9 @@
     "role": "Software Engineer",
     "duration": "Feb 2022 - Jan 2025",
     "description": [
-      "**Led a team of two** in the design, architecture, and implementation of a feature that **reduced system downtime by 20%** caused by disk failures.",
-      "Spearheaded the design, architecture, and implementation of a feature that **optimizes disk-to-memory space allocation**, preventing downsizing and minimizing wasted space on physical disks, resulting in a **50% increase in storage capacity**.",
-      "Collaborated with the development team to identify critical RAID processes and their dependencies, ensuring **comprehensive test coverage** for essential functionalities, and improving the **reliability and resilience** of the RAID subsystem."
+      "**Led a team of two** to design and build an **automated disk provisioning system** on top of a deeply entrenched legacy RAID codebase, navigating tightly coupled subsystem dependencies to deliver a **race-condition-free**, production-safe implementation without destabilizing existing I/O paths.",
+      "Designed and implemented a **dynamic snapshot reserve scaling system** that auto-tuned reserve allocation based on workload patterns and resync topology, preserving snapshot coverage to **favor incremental resyncs over full parity reconstructions** and **reducing system downtime by 20%**.",
+      "Mapped critical RAID process dependencies and built **comprehensive test coverage** across the subsystem, strengthening the **reliability and resilience** of core storage operations."
     ],
     "technologies": ["C++", "C", "Linux"]
   },
@@ -85,7 +85,7 @@
       "Designed **fire-and-forget HTTP + WebSocket protocol** delivering **real-time per-variable progress** during large object serialization, **eliminating polling**.",
       "Implemented **dual Zustand state machines** coordinating save/restore/retry/cancel across **9 async states** between REST and WebSocket events.",
       "Built **race-condition-safe** interrupt-and-save/restore flow, sequencing kernel interrupts with snapshot ops under concurrent edge cases.",
-      "**Owned system end-to-end**: Python serialization backend, **7-endpoint REST/WebSocket API**, and React/TypeScript UI with retry, cancel, and error alerting."
+      "**Owned system end-to-end**: Python serialization backend, 7-endpoint REST/WebSocket API, and React/TypeScript UI with retry, cancel, and error alerting."
     ],
     "technologies": ["React", "Python", "Typescript", "AWS", "WebSocket", "REST APIs"]
   }
