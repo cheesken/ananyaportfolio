@@ -115,7 +115,7 @@ export default function HomePanel() {
             <img
               src={circleImg}
               alt="Ananya"
-              className={`w-48 h-48 sm:w-56 sm:h-56 rounded-full object-cover relative ${peeled ? 'sticker-peel' : hasBeenPeeled ? 'sticker-unpeel' : ''}`}
+              className={`w-48 h-48 sm:w-56 sm:h-56 rounded-full object-cover relative ${peeled ? 'sticker-peel cursor-pointer' : hasBeenPeeled ? 'sticker-unpeel' : ''}`}
               onClick={handleImgClick}
               onMouseDown={startPress}
               onMouseUp={cancelPress}
@@ -144,7 +144,7 @@ export default function HomePanel() {
             <img
               src={stickerImg}
               alt="Ananya"
-              className={`h-full w-auto max-w-52 lg:max-w-64 xl:max-w-80 object-contain drop-shadow-lg relative ${peeled ? 'sticker-peel' : hasBeenPeeled ? 'sticker-unpeel' : ''}`}
+              className={`h-full w-auto max-w-52 lg:max-w-64 xl:max-w-80 object-contain drop-shadow-lg relative ${peeled ? 'sticker-peel cursor-pointer' : hasBeenPeeled ? 'sticker-unpeel' : ''}`}
               onClick={handleImgClick}
               onMouseDown={startPress}
               onMouseUp={cancelPress}
@@ -181,7 +181,7 @@ export default function HomePanel() {
             I'm a software engineer with 3+ years of experience building robust systems at scale. I'm endlessly curious and love learning new things, so this is a collection of some of what I've picked up along the way. Feel free to explore, and reach out if you have a question, want to chat, or just want to say hi!{' '}
             <span
               ref={heartRef}
-              className={`cursor-pointer select-none ${drifting ? 'heart-liftoff' : 'transition-opacity duration-500'}`}
+              className={`select-none cursor-default ${drifting ? 'heart-liftoff' : 'transition-opacity duration-500'}`}
               onClick={handleClick}
             >
               ❤︎

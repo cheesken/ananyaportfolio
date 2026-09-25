@@ -62,6 +62,76 @@ function App() {
     mainRef.current?.scrollTo({ top: 0, behavior: 'smooth' })
   }, [activeTab])
 
+  // 90s ghost cursor trail — desktop only
+  useEffect(() => {
+    if (window.innerWidth < 768) return
+
+    const LIFE_SPAN = 12
+    const MIN_DELAY = 3
+    const MAX_DELAY = 20
+    let width = window.innerWidth
+    let height = window.innerHeight
+    const particles: { x: number; y: number; life: number; initial: number }[] = []
+    let animationFrame: number
+
+    const baseImage = new Image()
+    baseImage.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 24 24'%3E%3Cpath d='M2 1L2 20L7 15L11 22L14 20.5L10 13.5L17 13.5Z' fill='%23000' stroke='%23000' stroke-width='1'/%3E%3Cpath d='M3 3L3 18L7.2 14L11.2 21L13 20L9 13L15.5 13Z' fill='%23fff'/%3E%3C/svg%3E"
+
+    const canvas = document.createElement('canvas')
+    const ctx = canvas.getContext('2d')!
+    canvas.style.position = 'fixed'
+    canvas.style.top = '0px'
+    canvas.style.left = '0px'
+    canvas.style.pointerEvents = 'none'
+    canvas.style.zIndex = '9999999999'
+    canvas.width = width
+    canvas.height = height
+    document.body.appendChild(canvas)
+
+    let lastAdd = Date.now()
+    let interval = Math.floor(Math.random() * (MAX_DELAY - MIN_DELAY + 1)) + MIN_DELAY
+
+    function onMouseMove(e: MouseEvent) {
+      if (lastAdd + interval > Date.now()) return
+      lastAdd = Date.now()
+      interval = Math.floor(Math.random() * (MAX_DELAY - MIN_DELAY + 1)) + MIN_DELAY
+      particles.push({ x: e.clientX, y: e.clientY, life: LIFE_SPAN, initial: LIFE_SPAN })
+    }
+
+    function onResize() {
+      width = window.innerWidth
+      height = window.innerHeight
+      canvas.width = width
+      canvas.height = height
+    }
+
+    function loop() {
+      if (particles.length > 0) {
+        ctx.clearRect(0, 0, width, height)
+        for (let i = particles.length - 1; i >= 0; i--) {
+          const p = particles[i]
+          p.life--
+          if (p.life < 0) { particles.splice(i, 1); continue }
+          ctx.globalAlpha = Math.max(p.life / p.initial, 0) * 0.5
+          ctx.drawImage(baseImage, p.x, p.y)
+        }
+        if (particles.length === 0) ctx.clearRect(0, 0, width, height)
+      }
+      animationFrame = requestAnimationFrame(loop)
+    }
+
+    document.body.addEventListener('mousemove', onMouseMove)
+    window.addEventListener('resize', onResize)
+    loop()
+
+    return () => {
+      cancelAnimationFrame(animationFrame)
+      canvas.remove()
+      document.body.removeEventListener('mousemove', onMouseMove)
+      window.removeEventListener('resize', onResize)
+    }
+  }, [])
+
   // perforated hover magnify — desktop only
   useEffect(() => {
     const el = hoverRef.current
@@ -203,7 +273,7 @@ function App() {
         {/* Folder body */}
         <main
           ref={mainRef}
-          className="relative z-10 rounded-tr-[20px] rounded-b-[20px] p-6 sm:p-8 md:p-10 lg:p-12 h-[75vh] overflow-y-auto"
+          className="relative rounded-tr-[20px] rounded-b-[20px] p-6 sm:p-8 md:p-10 lg:p-12 h-[75vh] overflow-y-auto"
           style={{
             backgroundColor: current.bg,
             backgroundImage: `
@@ -230,10 +300,10 @@ function App() {
 
       </div>
 
-      {/* Secret arcade click zone — desktop only, bottom half of screen */}
+      {/* Secret arcade click zone — desktop only, below folder to screen bottom */}
       <div
         className="hidden md:block fixed left-0 right-0 bottom-0 cursor-default select-none"
-        style={{ top: '50%' }}
+        style={{ height: 'calc((100vh - 75vh) / 2)' }}
         onClick={() => {
           const now = Date.now()
           const ts = clickTimestamps.current

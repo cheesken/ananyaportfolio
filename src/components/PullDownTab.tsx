@@ -24,6 +24,8 @@ export default function PullDownTab() {
       >
         {/* Panel */}
         <div
+          onClick={toggle}
+          className="cursor-pointer"
           style={{
             backgroundColor: '#F4F0E1',
             backgroundImage: `
