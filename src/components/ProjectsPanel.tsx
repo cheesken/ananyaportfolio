@@ -55,7 +55,8 @@ export default function ProjectsPanel() {
               style={{
                 width: 16,
                 height: 16,
-                opacity: filterOpen ? 1 : 0.5,
+                opacity: filterOpen ? 1 : 0.85,
+                filter: 'brightness(0)',
                 transition: 'opacity 0.2s',
               }}
               draggable={false}
