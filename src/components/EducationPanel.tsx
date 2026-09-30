@@ -7,14 +7,27 @@ const entries = ([...educationData] as Education[]).sort((a, b) => b.id - a.id);
 export default function EducationPanel() {
   return (
     <div>
-      <h1
-        className="text-[clamp(1.8rem,5vw,3rem)] text-[#2E2A22] mb-4 sm:mb-6 md:mb-8"
-        style={{ fontFamily: "'DM Serif Display', serif" }}
+      <div
+        className="sticky -top-6 sm:-top-8 md:-top-10 lg:-top-12 z-10 -mx-6 px-6 -mt-6 pt-6 pb-1 sm:-mx-8 sm:px-8 sm:-mt-8 sm:pt-8 md:-mx-10 md:px-10 md:-mt-10 md:pt-10 lg:-mx-12 lg:px-12 lg:-mt-12 lg:pt-12"
+        style={{
+          backgroundColor: 'var(--panel-bg)',
+          backgroundImage: `
+            repeating-linear-gradient(0deg, rgba(0,0,0,0.015) 0px, rgba(0,0,0,0.015) 1px, transparent 1px, transparent 4px),
+            radial-gradient(circle at 30% 20%, rgba(255,255,255,0.12), transparent 50%),
+            radial-gradient(circle at 70% 80%, rgba(0,0,0,0.04), transparent 50%)
+          `,
+          backgroundAttachment: 'fixed',
+        }}
       >
-        Education
-      </h1>
+        <h1
+          className="text-[clamp(1.8rem,5vw,3rem)] text-[#2E2A22]"
+          style={{ fontFamily: "'DM Serif Display', serif" }}
+        >
+          Education
+        </h1>
+      </div>
 
-      <div className="space-y-4 sm:space-y-6">
+      <div className="space-y-4 sm:space-y-6 mt-4 sm:mt-6 md:mt-8">
         {entries.map((entry, i) => (
           <div
             key={entry.id}

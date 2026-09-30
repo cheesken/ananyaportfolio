@@ -85,15 +85,6 @@ export default function ExpandCard({ isExpanded, onToggle, header, pills, expand
           </div>
           <div className="flex items-center gap-2 flex-shrink-0">
             {isExpanded && headerAction}
-            <span
-              className={`
-                text-[#5B5340] text-sm mt-1
-                transition-transform duration-300
-                ${isExpanded ? 'rotate-45' : 'rotate-0'}
-              `}
-            >
-              +
-            </span>
           </div>
         </div>
 

@@ -20,83 +20,96 @@ export default function ProjectsPanel() {
 
   return (
     <div>
-      <div className="flex items-center justify-between mb-4 sm:mb-6 md:mb-8">
-        <h1
-          className="text-[clamp(1.8rem,5vw,3rem)] text-[#2E2A22]"
-          style={{ fontFamily: "'DM Serif Display', serif" }}
-        >
-          Projects
-        </h1>
-        <div className="relative" style={{ width: 50, height: 50 }}>
-          {/* "Filter" label + arrow */}
-          <span
-            className="absolute -top-7 left-1/2 -translate-x-1/2 text-white/60 whitespace-nowrap select-none pointer-events-none hidden sm:block"
-            style={{ fontFamily: "'Caveat', cursive", fontSize: 18 }}
+      <div
+        className="sticky -top-6 sm:-top-8 md:-top-10 lg:-top-12 z-10 -mx-6 px-6 -mt-6 pt-6 pb-1 sm:-mx-8 sm:px-8 sm:-mt-8 sm:pt-8 md:-mx-10 md:px-10 md:-mt-10 md:pt-10 lg:-mx-12 lg:px-12 lg:-mt-12 lg:pt-12"
+        style={{
+          backgroundColor: 'var(--panel-bg)',
+          backgroundImage: `
+            repeating-linear-gradient(0deg, rgba(0,0,0,0.015) 0px, rgba(0,0,0,0.015) 1px, transparent 1px, transparent 4px),
+            radial-gradient(circle at 30% 20%, rgba(255,255,255,0.12), transparent 50%),
+            radial-gradient(circle at 70% 80%, rgba(0,0,0,0.04), transparent 50%)
+          `,
+          backgroundAttachment: 'fixed',
+        }}
+      >
+        <div className="flex items-center justify-between">
+          <h1
+            className="text-[clamp(1.8rem,5vw,3rem)] text-[#2E2A22]"
+            style={{ fontFamily: "'DM Serif Display', serif" }}
           >
-            Filter
-          </span>
-          <button
-            onClick={() => setFilterOpen(o => !o)}
-            className="cursor-pointer bg-transparent border-none p-0 transition-transform hover:scale-125 relative w-full h-full"
-            aria-label="Filter projects"
-            style={{ outline: 'none' }}
-          >
-            <img
-              src={circleImg}
-              alt=""
-              className="absolute inset-0 w-full h-full"
-              style={{ opacity: 0.55 }}
-              draggable={false}
-            />
-            <img
-              src={settingIcon}
-              alt=""
-              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
-              style={{
-                width: 16,
-                height: 16,
-                opacity: filterOpen ? 1 : 0.85,
-                filter: 'brightness(0)',
-                transition: 'opacity 0.2s',
-              }}
-              draggable={false}
-            />
-          </button>
+            Projects
+          </h1>
+          <div className="relative" style={{ width: 50, height: 50 }}>
+            {/* "Filter" label + arrow */}
+            <span
+              className="absolute -top-7 left-1/2 -translate-x-1/2 text-white/60 whitespace-nowrap select-none pointer-events-none hidden sm:block"
+              style={{ fontFamily: "'Caveat', cursive", fontSize: 18 }}
+            >
+              Filter
+            </span>
+            <button
+              onClick={() => setFilterOpen(o => !o)}
+              className="cursor-pointer bg-transparent border-none p-0 transition-transform hover:scale-125 relative w-full h-full"
+              aria-label="Filter projects"
+              style={{ outline: 'none' }}
+            >
+              <img
+                src={circleImg}
+                alt=""
+                className="absolute inset-0 w-full h-full"
+                style={{ opacity: 0.55 }}
+                draggable={false}
+              />
+              <img
+                src={settingIcon}
+                alt=""
+                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+                style={{
+                  width: 16,
+                  height: 16,
+                  opacity: filterOpen ? 1 : 0.85,
+                  filter: 'brightness(0)',
+                  transition: 'opacity 0.2s',
+                }}
+                draggable={false}
+              />
+            </button>
+          </div>
         </div>
       </div>
 
       {/* Filter tags */}
       {filterOpen && (
-        <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-4 sm:mb-6 animate-fade-in-up" style={{ '--i': 0 } as React.CSSProperties}>
-          <button
-            onClick={() => setActiveTag(null)}
-            className={`cursor-pointer border-none rounded-full px-3 py-1 text-[clamp(0.65rem,1.4vw,0.78rem)] transition-all ${
-              activeTag === null
-                ? 'bg-[#2E2A22] text-[#F7F2E7]'
-                : 'bg-[#2E2A22]/10 text-[#2E2A22] hover:bg-[#2E2A22]/20'
-            }`}
-            style={{ fontFamily: "'Instrument Sans', sans-serif" }}
-          >
-            All
-          </button>
-          {allTags.map(tag => (
+        <div className="flex flex-wrap gap-1.5 sm:gap-2 mt-4 sm:mt-6 mb-4 sm:mb-6 animate-fade-in-up" style={{ '--i': 0 } as React.CSSProperties}>
             <button
-              key={tag}
-              onClick={() => setActiveTag(prev => prev === tag ? null : tag)}
+              onClick={() => setActiveTag(null)}
               className={`cursor-pointer border-none rounded-full px-3 py-1 text-[clamp(0.65rem,1.4vw,0.78rem)] transition-all ${
-                activeTag === tag
+                activeTag === null
                   ? 'bg-[#2E2A22] text-[#F7F2E7]'
                   : 'bg-[#2E2A22]/10 text-[#2E2A22] hover:bg-[#2E2A22]/20'
               }`}
               style={{ fontFamily: "'Instrument Sans', sans-serif" }}
             >
-              {tag}
+              All
             </button>
-          ))}
-        </div>
-      )}
+            {allTags.map(tag => (
+              <button
+                key={tag}
+                onClick={() => setActiveTag(prev => prev === tag ? null : tag)}
+                className={`cursor-pointer border-none rounded-full px-3 py-1 text-[clamp(0.65rem,1.4vw,0.78rem)] transition-all ${
+                  activeTag === tag
+                    ? 'bg-[#2E2A22] text-[#F7F2E7]'
+                    : 'bg-[#2E2A22]/10 text-[#2E2A22] hover:bg-[#2E2A22]/20'
+                }`}
+                style={{ fontFamily: "'Instrument Sans', sans-serif" }}
+              >
+                {tag}
+              </button>
+            ))}
+          </div>
+        )}
 
-      <div key={activeTag ?? '__all'} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
+      <div key={activeTag ?? '__all'} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 mt-4 sm:mt-6 md:mt-8">
         {filtered.map((project, i) => (
           <ExpandCard
             key={project.id}
@@ -170,11 +183,11 @@ export default function ProjectsPanel() {
                     href={project.github}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-[#5B5340] hover:text-[#2E2A22] transition-colors mt-0.5"
+                    className="text-[#2E2A22]/80 hover:text-[#2E2A22] hover:scale-125 transition-all"
                     onClick={(e) => e.stopPropagation()}
                     title="View on GitHub"
                   >
-                    <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
+                    <svg viewBox="0 0 24 24" fill="currentColor" className="w-8 h-8">
                       <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
                     </svg>
                   </a>

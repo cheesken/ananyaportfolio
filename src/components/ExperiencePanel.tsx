@@ -18,54 +18,67 @@ export default function ExperiencePanel() {
 
   return (
     <div>
-      <div className="flex items-center justify-between mb-4 sm:mb-6 md:mb-8">
-        <h1
-          className="text-[clamp(1.8rem,5vw,3rem)] text-[#2E2A22]"
-          style={{ fontFamily: "'DM Serif Display', serif" }}
-        >
-          Experience
-        </h1>
-        <div className="relative" style={{ width: 50, height: 50 }}>
-          {/* "Filter" label + arrow */}
-          <span
-            className="absolute -top-7 left-1/2 -translate-x-1/2 text-white/60 whitespace-nowrap select-none pointer-events-none hidden sm:block"
-            style={{ fontFamily: "'Caveat', cursive", fontSize: 18 }}
+      <div
+        className="sticky -top-6 sm:-top-8 md:-top-10 lg:-top-12 z-10 -mx-6 px-6 -mt-6 pt-6 pb-1 sm:-mx-8 sm:px-8 sm:-mt-8 sm:pt-8 md:-mx-10 md:px-10 md:-mt-10 md:pt-10 lg:-mx-12 lg:px-12 lg:-mt-12 lg:pt-12"
+        style={{
+          backgroundColor: 'var(--panel-bg)',
+          backgroundImage: `
+            repeating-linear-gradient(0deg, rgba(0,0,0,0.015) 0px, rgba(0,0,0,0.015) 1px, transparent 1px, transparent 4px),
+            radial-gradient(circle at 30% 20%, rgba(255,255,255,0.12), transparent 50%),
+            radial-gradient(circle at 70% 80%, rgba(0,0,0,0.04), transparent 50%)
+          `,
+          backgroundAttachment: 'fixed',
+        }}
+      >
+        <div className="flex items-center justify-between">
+          <h1
+            className="text-[clamp(1.8rem,5vw,3rem)] text-[#2E2A22]"
+            style={{ fontFamily: "'DM Serif Display', serif" }}
           >
-            Filter
-          </span>
-          <button
-            onClick={() => setFilterOpen(o => !o)}
-            className="cursor-pointer bg-transparent border-none p-0 transition-transform hover:scale-125 relative w-full h-full"
-            aria-label="Filter experiences"
-            style={{ outline: 'none' }}
-          >
-          <img
-            src={circleImg}
-            alt=""
-            className="absolute inset-0 w-full h-full"
-            style={{ opacity: 0.55 }}
-            draggable={false}
-          />
-          <img
-            src={settingIcon}
-            alt=""
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
-            style={{
-              width: 16,
-              height: 16,
-              opacity: filterOpen ? 1 : 0.85,
-              filter: 'brightness(0)',
-              transition: 'opacity 0.2s',
-            }}
-            draggable={false}
-          />
-          </button>
+            Experience
+          </h1>
+          <div className="relative" style={{ width: 50, height: 50 }}>
+            {/* "Filter" label + arrow */}
+            <span
+              className="absolute -top-7 left-1/2 -translate-x-1/2 text-white/60 whitespace-nowrap select-none pointer-events-none hidden sm:block"
+              style={{ fontFamily: "'Caveat', cursive", fontSize: 18 }}
+            >
+              Filter
+            </span>
+            <button
+              onClick={() => setFilterOpen(o => !o)}
+              className="cursor-pointer bg-transparent border-none p-0 transition-transform hover:scale-125 relative w-full h-full"
+              aria-label="Filter experiences"
+              style={{ outline: 'none' }}
+            >
+              <img
+                src={circleImg}
+                alt=""
+                className="absolute inset-0 w-full h-full"
+                style={{ opacity: 0.55 }}
+                draggable={false}
+              />
+              <img
+                src={settingIcon}
+                alt=""
+                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+                style={{
+                  width: 16,
+                  height: 16,
+                  opacity: filterOpen ? 1 : 0.85,
+                  filter: 'brightness(0)',
+                  transition: 'opacity 0.2s',
+                }}
+                draggable={false}
+              />
+            </button>
+          </div>
         </div>
       </div>
 
       {/* Filter tags */}
       {filterOpen && (
-        <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-4 sm:mb-6 animate-fade-in-up" style={{ '--i': 0 } as React.CSSProperties}>
+        <div className="flex flex-wrap gap-1.5 sm:gap-2 mt-4 sm:mt-6 mb-4 sm:mb-6 animate-fade-in-up" style={{ '--i': 0 } as React.CSSProperties}>
           <button
             onClick={() => setActiveTag(null)}
             className={`cursor-pointer border-none rounded-full px-3 py-1 text-[clamp(0.65rem,1.4vw,0.78rem)] transition-all ${
@@ -95,7 +108,7 @@ export default function ExperiencePanel() {
       )}
 
       {/* Timeline */}
-      <div className="relative ml-3 sm:ml-4 md:ml-6">
+      <div className="relative ml-3 sm:ml-4 md:ml-6 mt-4 sm:mt-6 md:mt-8">
         {/* Vertical line */}
         <div className="absolute left-0 top-2 bottom-2 w-px bg-[#2E2A22] opacity-30" />
 

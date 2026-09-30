@@ -318,11 +318,13 @@ function App() {
           className="relative rounded-tr-[20px] rounded-b-[20px] p-6 sm:p-8 md:p-10 lg:p-12 h-[75vh] overflow-y-auto"
           style={{
             backgroundColor: current.bg,
+            ['--panel-bg' as string]: current.bg,
             backgroundImage: `
               repeating-linear-gradient(0deg, rgba(0,0,0,0.015) 0px, rgba(0,0,0,0.015) 1px, transparent 1px, transparent 4px),
               radial-gradient(circle at 30% 20%, rgba(255,255,255,0.12), transparent 50%),
               radial-gradient(circle at 70% 80%, rgba(0,0,0,0.04), transparent 50%)
             `,
+            backgroundAttachment: 'fixed',
             boxShadow: '0 8px 32px rgba(0,0,0,0.35), 0 2px 0 rgba(255,255,255,0.15) inset',
           }}
         >
