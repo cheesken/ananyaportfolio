@@ -2,17 +2,18 @@ import { useState, useCallback } from 'react';
 import data from '../data/currently.json';
 import ropeEnd from '../asset/rope end.png';
 
-// Random pick, uniformly distributed — always pick from least-shown quotes
-const COUNTS_KEY = 'quote-counts';
+// Round-robin through quotes, starting at a random index per session
+const INDEX_KEY = 'quote-index';
 function getNextQuote(): string {
-  let counts: Record<string, number> = {};
-  try { counts = JSON.parse(sessionStorage.getItem(COUNTS_KEY) || '{}'); } catch { /* ignore */ }
-  const min = Math.min(...data.quotes.map(q => counts[q] || 0));
-  const pool = data.quotes.filter(q => (counts[q] || 0) === min);
-  const pick = pool[Math.floor(Math.random() * pool.length)];
-  counts[pick] = (counts[pick] || 0) + 1;
-  sessionStorage.setItem(COUNTS_KEY, JSON.stringify(counts));
-  return pick;
+  const stored = sessionStorage.getItem(INDEX_KEY);
+  let idx: number;
+  if (stored === null) {
+    idx = Math.floor(Math.random() * data.quotes.length);
+  } else {
+    idx = (parseInt(stored, 10) + 1) % data.quotes.length;
+  }
+  sessionStorage.setItem(INDEX_KEY, String(idx));
+  return data.quotes[idx];
 }
 
 export default function PullDownTab() {
