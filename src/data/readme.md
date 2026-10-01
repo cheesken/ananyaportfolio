@@ -38,3 +38,7 @@
     "title": "Golden Hour",
     "passage": "Warm tones from a late afternoon sketch session."
   }-->
+
+### Quotes
+ಕೈ ಕೆಂಪಾದರೆ ಬಾಯಿಗೆ ರುಚಿ = Kai kempādare bāyige ruci
+ಮಾತು ಬೆಳ್ಳಿ, ಮೌನ ಬಂಗಾರ = Mātu beḷḷi, mauna baṅgāra
