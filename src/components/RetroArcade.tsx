@@ -2,21 +2,21 @@ import { useState, useRef, lazy, Suspense } from 'react';
 
 const games = [
   { id: 'snake', name: 'Snake', icon: '~>', keys: 'Arrow keys' },
-  { id: 'pong', name: 'Pong', icon: '|o', keys: 'Up / Down' },
-  { id: 'breakout', name: 'Breakout', icon: '##', keys: 'Left / Right' },
-  { id: 'flappy', name: 'Flappy', icon: '>>', keys: 'Space / Click' },
+  { id: 'bricks', name: 'Bricks', icon: '▦', keys: 'Left / Right' },
+  { id: 'dino', name: 'Dino', icon: 'T>', keys: 'Space / Down' },
+  { id: 'bounce', name: 'Bounce', icon: '●~', keys: 'Left / Right' },
 ] as const;
 
 const SnakeGame = lazy(() => import('./games/SnakeGame'));
-const PongGame = lazy(() => import('./games/PongGame'));
-const BreakoutGame = lazy(() => import('./games/BreakoutGame'));
-const FlappyBirdGame = lazy(() => import('./games/FlappyBirdGame'));
+const BrickBreakerGame = lazy(() => import('./games/BrickBreakerGame'));
+const DinoGame = lazy(() => import('./games/DinoGame'));
+const BounceGame = lazy(() => import('./games/BounceGame'));
 
 const gameComponents: Record<string, React.LazyExoticComponent<() => React.ReactElement>> = {
   snake: SnakeGame,
-  pong: PongGame,
-  breakout: BreakoutGame,
-  flappy: FlappyBirdGame,
+  bricks: BrickBreakerGame,
+  dino: DinoGame,
+  bounce: BounceGame,
 };
 
 interface Props {
@@ -101,12 +101,12 @@ export default function RetroArcade({ onClose }: Props) {
               className="text-[#00ff41] text-sm tracking-[0.2em] uppercase m-0"
               style={{ fontFamily: "'Space Mono', monospace" }}
             >
-              SECRET ARCADE
+              ARCADE
             </h2>
           )}
           <button
             onClick={handleClose}
-            className="text-[rgba(255,255,255,0.4)] hover:text-white text-lg cursor-pointer bg-transparent border-none leading-none"
+            className="text-[rgba(0,255,65,0.4)] hover:text-[#00ff41] text-lg cursor-pointer bg-transparent border-none leading-none"
           >
             ✕
           </button>

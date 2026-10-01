@@ -41,7 +41,6 @@ function App() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [arcadeOpen, setArcadeOpen] = useState(false)
   const menuRef = useRef<HTMLDivElement>(null)
-  const clickTimestamps = useRef<number[]>([])
   const hoverRef = useRef<HTMLDivElement>(null)
   const mainRef = useRef<HTMLElement>(null)
   const arcadeOpenRef = useRef(false)
@@ -344,21 +343,21 @@ function App() {
 
       </div>
 
-      {/* Secret arcade click zone — desktop only, below folder to screen bottom */}
-      <div
-        className="hidden md:block fixed left-0 right-0 bottom-0 cursor-default select-none"
-        style={{ height: 'calc((100vh - 75vh) / 2)' }}
-        onClick={() => {
-          const now = Date.now()
-          const ts = clickTimestamps.current
-          ts.push(now)
-          if (ts.length > 5) ts.shift()
-          if (ts.length === 5 && now - ts[0] < 2500) {
-            setArcadeOpen(true)
-            ts.length = 0
-          }
+      {/* Arcade sign — desktop only */}
+      <button
+        className="hidden md:block fixed bottom-1 left-1/2 -translate-x-1/2 bg-transparent border-none cursor-pointer select-none arcade-sign px-6 pt-3 pb-1"
+        style={{
+          fontFamily: "'Tilt Neon', 'Orbitron', sans-serif",
+          fontSize: '11px',
+          letterSpacing: '0.15em',
+          color: current.bg,
+          textShadow: `0 0 7px ${current.bg}, 0 0 20px ${current.bg}, 0 0 40px ${current.bg}80`,
+          transition: 'color 0.3s, text-shadow 0.3s',
         }}
-      />
+        onClick={() => setArcadeOpen(true)}
+      >
+        ARCADE
+      </button>
 
       {arcadeOpen && (
         <Suspense fallback={null}>

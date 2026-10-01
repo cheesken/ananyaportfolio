@@ -14,7 +14,9 @@ export default function SnakeGame() {
     nextDir: { x: 1, y: 0 },
     food: { x: 15, y: 10 },
     score: 0,
+    best: 0,
     over: false,
+    started: false,
     tick: 0,
   });
 
@@ -29,11 +31,13 @@ export default function SnakeGame() {
 
   const reset = useCallback(() => {
     const s = stateRef.current;
+    s.best = Math.max(s.best, s.score);
     s.snake = [{ x: 10, y: 10 }];
     s.dir = { x: 1, y: 0 };
     s.nextDir = { x: 1, y: 0 };
     s.score = 0;
     s.over = false;
+    s.started = false;
     spawnFood();
   }, [spawnFood]);
 
@@ -44,7 +48,7 @@ export default function SnakeGame() {
     const cell = canvas.width / COLS;
     let raf: number;
     let last = 0;
-    const speed = 120; // ms per tick
+    const speed = 90; // ms per tick
 
     function draw() {
       const s = stateRef.current;
@@ -83,6 +87,15 @@ export default function SnakeGame() {
       ctx.font = '14px "Space Mono", monospace';
       ctx.fillText(`SCORE: ${s.score}`, 8, canvas!.height - 8);
 
+      // best
+      if (s.best > 0) {
+        ctx.font = '11px "Space Mono", monospace';
+        ctx.textAlign = 'right';
+        ctx.fillStyle = 'rgba(0,255,65,0.4)';
+        ctx.fillText(`BEST: ${s.best}`, canvas!.width - 10, canvas!.height - 8);
+        ctx.textAlign = 'start';
+      }
+
       if (s.over) {
         ctx.fillStyle = 'rgba(0,0,0,0.7)';
         ctx.fillRect(0, 0, canvas!.width, canvas!.height);
@@ -100,7 +113,7 @@ export default function SnakeGame() {
     function update(time: number) {
       raf = requestAnimationFrame(update);
       const s = stateRef.current;
-      if (s.over) { draw(); return; }
+      if (s.over || !s.started) { draw(); return; }
       if (time - last < speed) { draw(); return; }
       last = time;
 
@@ -109,6 +122,7 @@ export default function SnakeGame() {
 
       if (head.x < 0 || head.x >= COLS || head.y < 0 || head.y >= ROWS ||
         s.snake.some(p => p.x === head.x && p.y === head.y)) {
+        s.best = Math.max(s.best, s.score);
         s.over = true;
         draw();
         return;
@@ -134,6 +148,7 @@ export default function SnakeGame() {
       const nd = map[e.key];
       if (nd && (nd.x + s.dir.x !== 0 || nd.y + s.dir.y !== 0)) {
         e.preventDefault();
+        if (!s.started) s.started = true;
         s.nextDir = nd;
       }
     }
