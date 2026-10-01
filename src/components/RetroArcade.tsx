@@ -1,10 +1,10 @@
 import { useState, useRef, lazy, Suspense } from 'react';
 
 const games = [
-  { id: 'snake', name: 'Snake', icon: '~>', keys: 'Arrow keys' },
-  { id: 'bricks', name: 'Bricks', icon: '▦', keys: 'Left / Right' },
-  { id: 'dino', name: 'Dino', icon: 'T>', keys: 'Space / Down' },
-  { id: 'bounce', name: 'Bounce', icon: '●~', keys: 'Left / Right' },
+  { id: 'snake', name: 'Snake', icon: '~>' },
+  { id: 'bricks', name: 'Bricks', icon: '▦' },
+  { id: 'dino', name: 'Dino', icon: 'T>' },
+  { id: 'bounce', name: 'Bounce', icon: '●~' },
 ] as const;
 
 const SnakeGame = lazy(() => import('./games/SnakeGame'));
@@ -133,12 +133,6 @@ export default function RetroArcade({ onClose }: Props) {
                     style={{ fontFamily: "'Space Mono', monospace" }}
                   >
                     {g.name}
-                  </span>
-                  <span
-                    className="text-[rgba(0,255,65,0.4)] text-[10px]"
-                    style={{ fontFamily: "'Space Mono', monospace" }}
-                  >
-                    {g.keys}
                   </span>
                 </button>
               ))}
