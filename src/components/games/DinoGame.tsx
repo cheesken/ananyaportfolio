@@ -200,10 +200,17 @@ export default function DinoGame() {
         ctx.fillStyle = '#ff6b6b';
         ctx.font = '18px "Space Mono", monospace';
         ctx.textAlign = 'center';
-        ctx.fillText('GAME OVER', W / 2, H / 2 - 10);
+        ctx.fillText('GAME OVER', W / 2, H / 2 - 20);
         ctx.fillStyle = FG;
-        ctx.font = '12px "Space Mono", monospace';
-        ctx.fillText(`Score: ${s.score} — Press R`, W / 2, H / 2 + 12);
+        ctx.font = '13px "Space Mono", monospace';
+        ctx.fillText(`Score: ${s.score}`, W / 2, H / 2 + 4);
+        if (s.score >= s.best && s.score > 0) {
+          ctx.fillStyle = '#ffd43b';
+          ctx.fillText('NEW BEST!', W / 2, H / 2 + 24);
+        }
+        ctx.fillStyle = FG;
+        ctx.font = '11px "Space Mono", monospace';
+        ctx.fillText('Press R', W / 2, H / 2 + 44);
         ctx.textAlign = 'start';
       }
     }

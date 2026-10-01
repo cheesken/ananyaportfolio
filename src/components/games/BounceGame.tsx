@@ -169,8 +169,7 @@ export default function BounceGame() {
         ctx.fillStyle = FG;
         ctx.font = '13px "Space Mono", monospace';
         ctx.textAlign = 'center';
-        ctx.fillText('ARROWS to move', W / 2, H / 2 - 10);
-        ctx.fillText('Auto-bounce on platforms', W / 2, H / 2 + 10);
+        ctx.fillText('ARROWS to move', W / 2, H / 2);
         ctx.textAlign = 'start';
       }
 

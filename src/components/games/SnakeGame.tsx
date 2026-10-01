@@ -96,16 +96,32 @@ export default function SnakeGame() {
         ctx.textAlign = 'start';
       }
 
+      // start prompt
+      if (!s.started && !s.over) {
+        ctx.fillStyle = FG;
+        ctx.font = '13px "Space Mono", monospace';
+        ctx.textAlign = 'center';
+        ctx.fillText('ARROWS to move', canvas!.width / 2, canvas!.height / 2);
+        ctx.textAlign = 'start';
+      }
+
       if (s.over) {
         ctx.fillStyle = 'rgba(0,0,0,0.7)';
         ctx.fillRect(0, 0, canvas!.width, canvas!.height);
         ctx.fillStyle = FOOD;
         ctx.font = '20px "Space Mono", monospace';
         ctx.textAlign = 'center';
-        ctx.fillText('GAME OVER', canvas!.width / 2, canvas!.height / 2 - 10);
+        ctx.fillText('GAME OVER', canvas!.width / 2, canvas!.height / 2 - 20);
         ctx.fillStyle = FG;
-        ctx.font = '13px "Space Mono", monospace';
-        ctx.fillText(`Score: ${s.score} — Press R`, canvas!.width / 2, canvas!.height / 2 + 16);
+        ctx.font = '14px "Space Mono", monospace';
+        ctx.fillText(`Score: ${s.score}`, canvas!.width / 2, canvas!.height / 2 + 8);
+        if (s.score >= s.best && s.score > 0) {
+          ctx.fillStyle = '#ffd43b';
+          ctx.fillText('NEW BEST!', canvas!.width / 2, canvas!.height / 2 + 30);
+        }
+        ctx.fillStyle = FG;
+        ctx.font = '12px "Space Mono", monospace';
+        ctx.fillText('Press R', canvas!.width / 2, canvas!.height / 2 + 54);
         ctx.textAlign = 'start';
       }
     }
