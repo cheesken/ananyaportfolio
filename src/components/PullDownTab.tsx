@@ -2,6 +2,11 @@ import { useState, useCallback } from 'react';
 import data from '../data/currently.json';
 import ropeEnd from '../asset/rope end.png';
 
+// Detect Arabic/Urdu/Persian script → RTL alignment
+function isRTL(text: string): boolean {
+  return /[\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\uFB50-\uFDFF\uFE70-\uFEFF]/.test(text);
+}
+
 // Round-robin through quotes, starting at a random index per session
 const INDEX_KEY = 'quote-index';
 function getNextQuote(): string {
@@ -131,12 +136,14 @@ export default function PullDownTab() {
 
             <p
               className="m-0"
+              dir={isRTL(randomQuote) ? 'rtl' : undefined}
               style={{
                 fontFamily: "'Caveat', cursive",
                 fontSize: 14,
                 lineHeight: 1.35,
                 color: '#5B5340',
                 fontStyle: 'italic',
+                textAlign: isRTL(randomQuote) ? 'right' : undefined,
               }}
             >
               "{randomQuote}"
