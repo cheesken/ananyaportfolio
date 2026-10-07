@@ -1,4 +1,5 @@
 import { useRef, useEffect, useCallback } from 'react';
+import type { GameOverPayload } from '../../arcade-types';
 
 const W = 400;
 const H = 400;
@@ -49,7 +50,9 @@ function generateSegment(startX: number, prevY: number): { platforms: Platform[]
   return { platforms, rings };
 }
 
-export default function BounceGame() {
+export default function BounceGame({ onGameOver }: { onGameOver?: (p: GameOverPayload) => void }) {
+  const onGameOverRef = useRef(onGameOver);
+  onGameOverRef.current = onGameOver;
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const keysRef = useRef<Set<string>>(new Set());
   const stateRef = useRef(initState());
@@ -68,7 +71,7 @@ export default function BounceGame() {
       score: 0,
       ringBonus: 0,
       dist: 0,
-      best: 0,
+      best: Number(sessionStorage.getItem('arcade-best-bounce')) || 0,
       over: false,
       started: false,
       onGround: true,
@@ -78,6 +81,7 @@ export default function BounceGame() {
   const reset = useCallback(() => {
     const s = stateRef.current;
     const best = Math.max(s.best, s.score);
+    sessionStorage.setItem('arcade-best-bounce', String(best));
     const fresh = initState();
     fresh.best = best;
     Object.assign(s, fresh);
@@ -253,8 +257,9 @@ export default function BounceGame() {
         ) {
           // spike collision
           if (p.spikes) {
-            s.best = Math.max(s.best, s.score);
+            s.best = Math.max(s.best, s.score); sessionStorage.setItem('arcade-best-bounce', String(s.best));
             s.over = true;
+            onGameOverRef.current?.({ game: 'bounce', score: s.score });
             draw();
             return;
           }
@@ -279,8 +284,9 @@ export default function BounceGame() {
 
       // fell off bottom
       if (s.ballY - BALL_R > H) {
-        s.best = Math.max(s.best, s.score);
+        s.best = Math.max(s.best, s.score); sessionStorage.setItem('arcade-best-bounce', String(s.best));
         s.over = true;
+        onGameOverRef.current?.({ game: 'bounce', score: s.score });
       }
 
       draw();

@@ -1,4 +1,5 @@
 import { useRef, useEffect, useCallback } from 'react';
+import type { GameOverPayload } from '../../arcade-types';
 
 const COLS = 20;
 const ROWS = 20;
@@ -6,7 +7,9 @@ const BG = '#0a0a0a';
 const FG = '#00ff41';
 const FOOD = '#ff6b6b';
 
-export default function SnakeGame() {
+export default function SnakeGame({ onGameOver }: { onGameOver?: (p: GameOverPayload) => void }) {
+  const onGameOverRef = useRef(onGameOver);
+  onGameOverRef.current = onGameOver;
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const stateRef = useRef({
     snake: [{ x: 10, y: 10 }],
@@ -14,7 +17,7 @@ export default function SnakeGame() {
     nextDir: { x: 1, y: 0 },
     food: { x: 15, y: 10 },
     score: 0,
-    best: 0,
+    best: Number(sessionStorage.getItem('arcade-best-snake')) || 0,
     over: false,
     started: false,
     tick: 0,
@@ -31,7 +34,7 @@ export default function SnakeGame() {
 
   const reset = useCallback(() => {
     const s = stateRef.current;
-    s.best = Math.max(s.best, s.score);
+    s.best = Math.max(s.best, s.score); sessionStorage.setItem('arcade-best-snake', String(s.best));
     s.snake = [{ x: 10, y: 10 }];
     s.dir = { x: 1, y: 0 };
     s.nextDir = { x: 1, y: 0 };
@@ -138,8 +141,9 @@ export default function SnakeGame() {
 
       if (head.x < 0 || head.x >= COLS || head.y < 0 || head.y >= ROWS ||
         s.snake.some(p => p.x === head.x && p.y === head.y)) {
-        s.best = Math.max(s.best, s.score);
+        s.best = Math.max(s.best, s.score); sessionStorage.setItem('arcade-best-snake', String(s.best));
         s.over = true;
+        onGameOverRef.current?.({ game: 'snake', score: s.score });
         draw();
         return;
       }

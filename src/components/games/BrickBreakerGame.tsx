@@ -1,4 +1,5 @@
 import { useRef, useEffect, useCallback } from 'react';
+import type { GameOverPayload } from '../../arcade-types';
 
 const W = 400;
 const H = 500;
@@ -107,7 +108,9 @@ function patternArrow(): number[][] {
 }
 
 // ---------- Component ----------
-export default function BrickBreakerGame() {
+export default function BrickBreakerGame({ onGameOver }: { onGameOver?: (p: GameOverPayload) => void }) {
+  const onGameOverRef = useRef(onGameOver);
+  onGameOverRef.current = onGameOver;
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const keysRef = useRef<Set<string>>(new Set());
   const stateRef = useRef(initState());
@@ -120,7 +123,7 @@ export default function BrickBreakerGame() {
       bricks: makeBricks(1),
       powerUps: [] as PowerUp[],
       score: 0,
-      best: 0,
+      best: Number(sessionStorage.getItem('arcade-best-bricks')) || 0,
       lives: 3,
       level: 1,
       over: false,
@@ -133,6 +136,7 @@ export default function BrickBreakerGame() {
   const reset = useCallback(() => {
     const s = stateRef.current;
     const best = Math.max(s.best, s.score);
+    sessionStorage.setItem('arcade-best-bricks', String(best));
     const fresh = initState();
     fresh.best = best;
     Object.assign(s, fresh);
@@ -367,8 +371,9 @@ export default function BrickBreakerGame() {
         s.padW = PAD_W; // reset paddle width
         s.combo = 0;
         if (s.lives <= 0) {
-          s.best = Math.max(s.best, s.score);
+          s.best = Math.max(s.best, s.score); sessionStorage.setItem('arcade-best-bricks', String(s.best));
           s.over = true;
+          onGameOverRef.current?.({ game: 'bricks', score: s.score });
         } else {
           // respawn ball
           s.balls.push({ x: W / 2, y: H - 36, vx: 2.5, vy: -(3.5 + s.level * 0.3) });
@@ -377,7 +382,7 @@ export default function BrickBreakerGame() {
 
       // check level clear (all non-steel bricks destroyed)
       if (s.bricks.every(b => b.steel || b.hp <= 0)) {
-        s.best = Math.max(s.best, s.score);
+        s.best = Math.max(s.best, s.score); sessionStorage.setItem('arcade-best-bricks', String(s.best));
         s.over = true;
         s.won = true;
       }

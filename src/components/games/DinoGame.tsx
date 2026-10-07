@@ -1,4 +1,5 @@
 import { useRef, useEffect, useCallback } from 'react';
+import type { GameOverPayload } from '../../arcade-types';
 
 const W = 400;
 const H = 200;
@@ -34,7 +35,9 @@ function spawnObstacle(x: number, speed: number): Obstacle {
   return { x, w: 28, h: 24, y: GROUND_Y - 24, type: 'cactus' };
 }
 
-export default function DinoGame() {
+export default function DinoGame({ onGameOver }: { onGameOver?: (p: GameOverPayload) => void }) {
+  const onGameOverRef = useRef(onGameOver);
+  onGameOverRef.current = onGameOver;
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const keysRef = useRef<Set<string>>(new Set());
   const stateRef = useRef(initState());
@@ -50,7 +53,7 @@ export default function DinoGame() {
       speed: 4,
       dist: 0,
       score: 0,
-      best: 0,
+      best: Number(sessionStorage.getItem('arcade-best-dino')) || 0,
       over: false,
       started: false,
       frame: 0,
@@ -62,6 +65,7 @@ export default function DinoGame() {
   const reset = useCallback(() => {
     const s = stateRef.current;
     const best = Math.max(s.best, s.score);
+    sessionStorage.setItem('arcade-best-dino', String(best));
     const fresh = initState();
     fresh.best = best;
     Object.assign(s, fresh);
@@ -262,8 +266,9 @@ export default function DinoGame() {
         const oBottom = o.y + o.h - 2;
 
         if (dinoRight > oLeft && dinoLeft < oRight && dinoBottom > oTop && dinoTop < oBottom) {
-          s.best = Math.max(s.best, s.score);
+          s.best = Math.max(s.best, s.score); sessionStorage.setItem('arcade-best-dino', String(s.best));
           s.over = true;
+          onGameOverRef.current?.({ game: 'dino', score: s.score });
           draw();
           return;
         }
