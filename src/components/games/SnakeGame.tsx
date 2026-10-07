@@ -201,14 +201,14 @@ export default function SnakeGame({ onGameOver }: { onGameOver?: (p: GameOverPay
     }
 
     window.addEventListener('keydown', onKey);
-    canvas.addEventListener('touchstart', onTouchStart, { passive: false });
-    canvas.addEventListener('touchend', onTouchEnd);
+    window.addEventListener('touchstart', onTouchStart, { passive: false });
+    window.addEventListener('touchend', onTouchEnd);
     raf = requestAnimationFrame(update);
     return () => {
       cancelAnimationFrame(raf);
       window.removeEventListener('keydown', onKey);
-      canvas.removeEventListener('touchstart', onTouchStart);
-      canvas.removeEventListener('touchend', onTouchEnd);
+      window.removeEventListener('touchstart', onTouchStart);
+      window.removeEventListener('touchend', onTouchEnd);
     };
   }, [reset, spawnFood]);
 

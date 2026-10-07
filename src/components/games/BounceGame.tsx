@@ -173,7 +173,7 @@ export default function BounceGame({ onGameOver }: { onGameOver?: (p: GameOverPa
         ctx.fillStyle = FG;
         ctx.font = '13px "Space Mono", monospace';
         ctx.textAlign = 'center';
-        ctx.fillText('ontouchstart' in window ? 'TOUCH left/right to move' : 'ARROWS to move', W / 2, H / 2);
+        ctx.fillText('ontouchstart' in window ? 'Use < > to move' : 'ARROWS to move', W / 2, H / 2);
         ctx.textAlign = 'start';
       }
 
@@ -306,57 +306,56 @@ export default function BounceGame({ onGameOver }: { onGameOver?: (p: GameOverPa
       if (!stateRef.current.started) stateRef.current.started = true;
     }
 
-    // Touch: hold left/right half to move
+    // Touch: tap to restart/start (movement via < > buttons)
     function onTouchStart(e: TouchEvent) {
       e.preventDefault();
       const s = stateRef.current;
       if (s.over) { reset(); return; }
       if (!s.started) s.started = true;
-      const rect = canvas!.getBoundingClientRect();
-      const x = e.touches[0].clientX - rect.left;
-      keysRef.current.delete('ArrowLeft');
-      keysRef.current.delete('ArrowRight');
-      if (x < rect.width / 2) keysRef.current.add('ArrowLeft');
-      else keysRef.current.add('ArrowRight');
-    }
-    function onTouchMove(e: TouchEvent) {
-      e.preventDefault();
-      const rect = canvas!.getBoundingClientRect();
-      const x = e.touches[0].clientX - rect.left;
-      keysRef.current.delete('ArrowLeft');
-      keysRef.current.delete('ArrowRight');
-      if (x < rect.width / 2) keysRef.current.add('ArrowLeft');
-      else keysRef.current.add('ArrowRight');
-    }
-    function onTouchEnd() {
-      keysRef.current.delete('ArrowLeft');
-      keysRef.current.delete('ArrowRight');
     }
 
     window.addEventListener('keydown', onKey);
     window.addEventListener('keyup', onKeyUp);
     canvas.addEventListener('click', onClick);
-    canvas.addEventListener('touchstart', onTouchStart, { passive: false });
-    canvas.addEventListener('touchmove', onTouchMove, { passive: false });
-    canvas.addEventListener('touchend', onTouchEnd);
+    window.addEventListener('touchstart', onTouchStart, { passive: false });
     raf = requestAnimationFrame(update);
     return () => {
       cancelAnimationFrame(raf);
       window.removeEventListener('keydown', onKey);
       window.removeEventListener('keyup', onKeyUp);
       canvas.removeEventListener('click', onClick);
-      canvas.removeEventListener('touchstart', onTouchStart);
-      canvas.removeEventListener('touchmove', onTouchMove);
-      canvas.removeEventListener('touchend', onTouchEnd);
+      window.removeEventListener('touchstart', onTouchStart);
     };
   }, [reset]);
 
+  const isTouch = 'ontouchstart' in window;
+
+  const btnClass = "text-[#00ff41] text-xl select-none bg-transparent border border-[rgba(0,255,65,0.25)] rounded-lg w-10 h-20 flex items-center justify-center active:bg-[rgba(0,255,65,0.1)] transition-colors";
+
   return (
-    <canvas
-      ref={canvasRef}
-      width={W}
-      height={H}
-      className="w-full max-w-[400px] aspect-square rounded cursor-pointer"
-    />
+    <div className="flex items-center justify-center gap-2">
+      {isTouch && (
+        <button
+          onTouchStart={(e) => { e.preventDefault(); keysRef.current.delete('ArrowRight'); keysRef.current.add('ArrowLeft'); if (!stateRef.current.started) stateRef.current.started = true; }}
+          onTouchEnd={() => keysRef.current.delete('ArrowLeft')}
+          className={btnClass}
+          style={{ fontFamily: "'Space Mono', monospace" }}
+        >&lt;</button>
+      )}
+      <canvas
+        ref={canvasRef}
+        width={W}
+        height={H}
+        className="flex-1 min-w-0 max-w-[400px] aspect-square rounded cursor-pointer"
+      />
+      {isTouch && (
+        <button
+          onTouchStart={(e) => { e.preventDefault(); keysRef.current.delete('ArrowLeft'); keysRef.current.add('ArrowRight'); if (!stateRef.current.started) stateRef.current.started = true; }}
+          onTouchEnd={() => keysRef.current.delete('ArrowRight')}
+          className={btnClass}
+          style={{ fontFamily: "'Space Mono', monospace" }}
+        >&gt;</button>
+      )}
+    </div>
   );
 }

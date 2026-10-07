@@ -229,7 +229,7 @@ export default function BrickBreakerGame({ onGameOver }: { onGameOver?: (p: Game
         ctx.font = '13px "Space Mono", monospace';
         ctx.textAlign = 'center';
         if ('ontouchstart' in window) {
-          ctx.fillText('DRAG to move — TAP to launch', W / 2, H / 2 + 20);
+          ctx.fillText('Use < > — TAP to launch', W / 2, H / 2 + 20);
         } else {
           ctx.fillText('LEFT / RIGHT to move', W / 2, H / 2 + 20);
           ctx.fillText('SPACE to launch', W / 2, H / 2 + 40);
@@ -421,47 +421,56 @@ export default function BrickBreakerGame({ onGameOver }: { onGameOver?: (p: Game
     }
     function onKeyUp(e: KeyboardEvent) { keysRef.current.delete(e.key); }
 
-    // Touch: drag to move paddle, tap to launch/next level
+    // Touch: tap to launch/restart/next level (movement via < > buttons)
     function onTouchStart(e: TouchEvent) {
       e.preventDefault();
       const s = stateRef.current;
       if (s.over && s.won) { nextLevel(); return; }
       if (s.over && !s.won) { reset(); return; }
       if (!s.started && !s.over) s.started = true;
-      const rect = canvas!.getBoundingClientRect();
-      const x = e.touches[0].clientX - rect.left;
-      const scale = W / rect.width;
-      s.padX = x * scale - s.padW / 2;
-    }
-    function onTouchMove(e: TouchEvent) {
-      e.preventDefault();
-      const rect = canvas!.getBoundingClientRect();
-      const x = e.touches[0].clientX - rect.left;
-      const scale = W / rect.width;
-      stateRef.current.padX = x * scale - stateRef.current.padW / 2;
     }
 
     window.addEventListener('keydown', onKey);
     window.addEventListener('keyup', onKeyUp);
-    canvas.addEventListener('touchstart', onTouchStart, { passive: false });
-    canvas.addEventListener('touchmove', onTouchMove, { passive: false });
+    window.addEventListener('touchstart', onTouchStart, { passive: false });
     raf = requestAnimationFrame(update);
     return () => {
       cancelAnimationFrame(raf);
       window.removeEventListener('keydown', onKey);
       window.removeEventListener('keyup', onKeyUp);
-      canvas.removeEventListener('touchstart', onTouchStart);
-      canvas.removeEventListener('touchmove', onTouchMove);
+      window.removeEventListener('touchstart', onTouchStart);
     };
   }, [reset]);
 
+  const isTouch = 'ontouchstart' in window;
+
+  const btnClass = "text-[#00ff41] text-xl select-none bg-transparent border border-[rgba(0,255,65,0.25)] rounded-lg w-10 h-20 flex items-center justify-center active:bg-[rgba(0,255,65,0.1)] transition-colors";
+
   return (
-    <canvas
-      ref={canvasRef}
-      width={W}
-      height={H}
-      className="w-full max-w-[400px] rounded"
-      style={{ aspectRatio: `${W}/${H}` }}
-    />
+    <div className="flex items-center justify-center gap-2">
+      {isTouch && (
+        <button
+          onTouchStart={(e) => { e.preventDefault(); keysRef.current.delete('ArrowRight'); keysRef.current.add('ArrowLeft'); }}
+          onTouchEnd={() => keysRef.current.delete('ArrowLeft')}
+          className={btnClass}
+          style={{ fontFamily: "'Space Mono', monospace" }}
+        >&lt;</button>
+      )}
+      <canvas
+        ref={canvasRef}
+        width={W}
+        height={H}
+        className="flex-1 min-w-0 max-w-[400px] rounded"
+        style={{ aspectRatio: `${W}/${H}` }}
+      />
+      {isTouch && (
+        <button
+          onTouchStart={(e) => { e.preventDefault(); keysRef.current.delete('ArrowLeft'); keysRef.current.add('ArrowRight'); }}
+          onTouchEnd={() => keysRef.current.delete('ArrowRight')}
+          className={btnClass}
+          style={{ fontFamily: "'Space Mono', monospace" }}
+        >&gt;</button>
+      )}
+    </div>
   );
 }

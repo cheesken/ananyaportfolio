@@ -306,38 +306,26 @@ export default function DinoGame({ onGameOver }: { onGameOver?: (p: GameOverPayl
       if (!s.jumping) { s.jumping = true; s.vel = JUMP_VEL; }
     }
 
-    // Touch: tap to jump, hold bottom half to duck
+    // Touch: tap anywhere to jump
     function onTouchStart(e: TouchEvent) {
       e.preventDefault();
       const s = stateRef.current;
       if (s.over) { reset(); return; }
       if (!s.started) s.started = true;
-      const rect = canvas!.getBoundingClientRect();
-      const y = e.touches[0].clientY - rect.top;
-      if (y > rect.height * 0.6) {
-        keysRef.current.add('ArrowDown');
-      } else if (!s.jumping) {
-        s.jumping = true;
-        s.vel = JUMP_VEL;
-      }
-    }
-    function onTouchEnd() {
-      keysRef.current.delete('ArrowDown');
+      if (!s.jumping) { s.jumping = true; s.vel = JUMP_VEL; }
     }
 
     window.addEventListener('keydown', onKey);
     window.addEventListener('keyup', onKeyUp);
     canvas.addEventListener('click', onClick);
-    canvas.addEventListener('touchstart', onTouchStart, { passive: false });
-    canvas.addEventListener('touchend', onTouchEnd);
+    window.addEventListener('touchstart', onTouchStart, { passive: false });
     raf = requestAnimationFrame(update);
     return () => {
       cancelAnimationFrame(raf);
       window.removeEventListener('keydown', onKey);
       window.removeEventListener('keyup', onKeyUp);
       canvas.removeEventListener('click', onClick);
-      canvas.removeEventListener('touchstart', onTouchStart);
-      canvas.removeEventListener('touchend', onTouchEnd);
+      window.removeEventListener('touchstart', onTouchStart);
     };
   }, [reset]);
 
