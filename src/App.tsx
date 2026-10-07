@@ -343,7 +343,7 @@ function App() {
 
       </div>
 
-      {/* Arcade sign — desktop only */}
+      {/* Arcade sign */}
       <button
         className="hidden md:block fixed bottom-1 left-1/2 -translate-x-1/2 bg-transparent border-none cursor-pointer select-none arcade-sign px-6 pt-3 pb-1"
         style={{

@@ -104,7 +104,7 @@ export default function SnakeGame({ onGameOver }: { onGameOver?: (p: GameOverPay
         ctx.fillStyle = FG;
         ctx.font = '13px "Space Mono", monospace';
         ctx.textAlign = 'center';
-        ctx.fillText('ARROWS to move', canvas!.width / 2, canvas!.height / 2);
+        ctx.fillText('ontouchstart' in window ? 'SWIPE to move' : 'ARROWS to move', canvas!.width / 2, canvas!.height / 2);
         ctx.textAlign = 'start';
       }
 
@@ -124,7 +124,7 @@ export default function SnakeGame({ onGameOver }: { onGameOver?: (p: GameOverPay
         }
         ctx.fillStyle = FG;
         ctx.font = '12px "Space Mono", monospace';
-        ctx.fillText('Press R', canvas!.width / 2, canvas!.height / 2 + 54);
+        ctx.fillText('ontouchstart' in window ? 'Tap to restart' : 'Press R', canvas!.width / 2, canvas!.height / 2 + 54);
         ctx.textAlign = 'start';
       }
     }
@@ -173,9 +173,43 @@ export default function SnakeGame({ onGameOver }: { onGameOver?: (p: GameOverPay
       }
     }
 
+    // Touch: swipe to change direction
+    let touchStart: { x: number; y: number } | null = null;
+    function onTouchStart(e: TouchEvent) {
+      e.preventDefault();
+      const t = e.touches[0];
+      touchStart = { x: t.clientX, y: t.clientY };
+      const s = stateRef.current;
+      if (s.over) { reset(); return; }
+    }
+    function onTouchEnd(e: TouchEvent) {
+      if (!touchStart) return;
+      const t = e.changedTouches[0];
+      const dx = t.clientX - touchStart.x;
+      const dy = t.clientY - touchStart.y;
+      touchStart = null;
+      if (Math.abs(dx) < 15 && Math.abs(dy) < 15) return; // too small
+      const s = stateRef.current;
+      if (!s.started) s.started = true;
+      let nd: { x: number; y: number };
+      if (Math.abs(dx) > Math.abs(dy)) {
+        nd = dx > 0 ? { x: 1, y: 0 } : { x: -1, y: 0 };
+      } else {
+        nd = dy > 0 ? { x: 0, y: 1 } : { x: 0, y: -1 };
+      }
+      if (nd.x + s.dir.x !== 0 || nd.y + s.dir.y !== 0) s.nextDir = nd;
+    }
+
     window.addEventListener('keydown', onKey);
+    canvas.addEventListener('touchstart', onTouchStart, { passive: false });
+    canvas.addEventListener('touchend', onTouchEnd);
     raf = requestAnimationFrame(update);
-    return () => { cancelAnimationFrame(raf); window.removeEventListener('keydown', onKey); };
+    return () => {
+      cancelAnimationFrame(raf);
+      window.removeEventListener('keydown', onKey);
+      canvas.removeEventListener('touchstart', onTouchStart);
+      canvas.removeEventListener('touchend', onTouchEnd);
+    };
   }, [reset, spawnFood]);
 
   return <canvas ref={canvasRef} width={400} height={400} className="w-full max-w-[400px] aspect-square rounded" />;

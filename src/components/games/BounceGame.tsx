@@ -173,7 +173,7 @@ export default function BounceGame({ onGameOver }: { onGameOver?: (p: GameOverPa
         ctx.fillStyle = FG;
         ctx.font = '13px "Space Mono", monospace';
         ctx.textAlign = 'center';
-        ctx.fillText('ARROWS to move', W / 2, H / 2);
+        ctx.fillText('ontouchstart' in window ? 'TOUCH left/right to move' : 'ARROWS to move', W / 2, H / 2);
         ctx.textAlign = 'start';
       }
 
@@ -193,7 +193,7 @@ export default function BounceGame({ onGameOver }: { onGameOver?: (p: GameOverPa
         }
         ctx.fillStyle = FG;
         ctx.font = '12px "Space Mono", monospace';
-        ctx.fillText('Press R', W / 2, H / 2 + 54);
+        ctx.fillText('ontouchstart' in window ? 'Tap to restart' : 'Press R', W / 2, H / 2 + 54);
         ctx.textAlign = 'start';
       }
     }
@@ -306,15 +306,48 @@ export default function BounceGame({ onGameOver }: { onGameOver?: (p: GameOverPa
       if (!stateRef.current.started) stateRef.current.started = true;
     }
 
+    // Touch: hold left/right half to move
+    function onTouchStart(e: TouchEvent) {
+      e.preventDefault();
+      const s = stateRef.current;
+      if (s.over) { reset(); return; }
+      if (!s.started) s.started = true;
+      const rect = canvas!.getBoundingClientRect();
+      const x = e.touches[0].clientX - rect.left;
+      keysRef.current.delete('ArrowLeft');
+      keysRef.current.delete('ArrowRight');
+      if (x < rect.width / 2) keysRef.current.add('ArrowLeft');
+      else keysRef.current.add('ArrowRight');
+    }
+    function onTouchMove(e: TouchEvent) {
+      e.preventDefault();
+      const rect = canvas!.getBoundingClientRect();
+      const x = e.touches[0].clientX - rect.left;
+      keysRef.current.delete('ArrowLeft');
+      keysRef.current.delete('ArrowRight');
+      if (x < rect.width / 2) keysRef.current.add('ArrowLeft');
+      else keysRef.current.add('ArrowRight');
+    }
+    function onTouchEnd() {
+      keysRef.current.delete('ArrowLeft');
+      keysRef.current.delete('ArrowRight');
+    }
+
     window.addEventListener('keydown', onKey);
     window.addEventListener('keyup', onKeyUp);
     canvas.addEventListener('click', onClick);
+    canvas.addEventListener('touchstart', onTouchStart, { passive: false });
+    canvas.addEventListener('touchmove', onTouchMove, { passive: false });
+    canvas.addEventListener('touchend', onTouchEnd);
     raf = requestAnimationFrame(update);
     return () => {
       cancelAnimationFrame(raf);
       window.removeEventListener('keydown', onKey);
       window.removeEventListener('keyup', onKeyUp);
       canvas.removeEventListener('click', onClick);
+      canvas.removeEventListener('touchstart', onTouchStart);
+      canvas.removeEventListener('touchmove', onTouchMove);
+      canvas.removeEventListener('touchend', onTouchEnd);
     };
   }, [reset]);
 

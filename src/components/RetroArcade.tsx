@@ -258,7 +258,7 @@ export default function RetroArcade({ onClose }: Props) {
                     className="text-[rgba(0,255,65,0.35)] text-[10px] tracking-wider uppercase cursor-pointer bg-transparent border-t border-[rgba(0,255,65,0.1)] py-1.5 hover:text-[#00ff41] hover:bg-[rgba(0,255,65,0.05)] transition-colors duration-150"
                     style={{ fontFamily: "'Space Mono', monospace" }}
                   >
-                    HIGHSCORES
+                    HIGHSCORE
                   </button>
                 </div>
               ))}
@@ -281,7 +281,7 @@ export default function RetroArcade({ onClose }: Props) {
                 <GameComp onGameOver={handleGameOver} />
               </Suspense>
               <p
-                className="text-[rgba(0,255,65,0.35)] text-[10px] m-0"
+                className="text-[rgba(0,255,65,0.35)] text-[10px] m-0 hidden md:block"
                 style={{ fontFamily: "'Space Mono', monospace" }}
               >
                 Press R to restart
@@ -341,7 +341,7 @@ export default function RetroArcade({ onClose }: Props) {
               style={{ fontFamily: "'Space Mono', monospace" }}
             >
               <p className="text-[#00ff41] text-sm tracking-[0.2em] uppercase m-0">
-                {gameName} — HIGHSCORES
+                {gameName} — HIGHSCORE
               </p>
 
               {leaderboard.length === 0 ? (
@@ -391,7 +391,7 @@ export default function RetroArcade({ onClose }: Props) {
                       onClick={() => viewScores(activeGame)}
                       className="text-[rgba(0,255,65,0.5)] text-xs tracking-wider uppercase cursor-pointer bg-transparent border border-[rgba(0,255,65,0.15)] px-5 py-2 rounded hover:bg-[rgba(0,255,65,0.06)] transition-colors"
                     >
-                      HIGHSCORES
+                      HIGHSCORE
                     </button>
                   </>
                 )}

@@ -228,8 +228,12 @@ export default function BrickBreakerGame({ onGameOver }: { onGameOver?: (p: Game
         ctx.fillStyle = FG;
         ctx.font = '13px "Space Mono", monospace';
         ctx.textAlign = 'center';
-        ctx.fillText('LEFT / RIGHT to move', W / 2, H / 2 + 20);
-        ctx.fillText('SPACE to launch', W / 2, H / 2 + 40);
+        if ('ontouchstart' in window) {
+          ctx.fillText('DRAG to move — TAP to launch', W / 2, H / 2 + 20);
+        } else {
+          ctx.fillText('LEFT / RIGHT to move', W / 2, H / 2 + 20);
+          ctx.fillText('SPACE to launch', W / 2, H / 2 + 40);
+        }
         ctx.textAlign = 'start';
       }
 
@@ -249,7 +253,8 @@ export default function BrickBreakerGame({ onGameOver }: { onGameOver?: (p: Game
         }
         ctx.fillStyle = FG;
         ctx.font = '12px "Space Mono", monospace';
-        ctx.fillText(s.won ? 'SPACE for next level' : 'Press R', W / 2, H / 2 + 50);
+        const isTouch = 'ontouchstart' in window;
+        ctx.fillText(s.won ? (isTouch ? 'Tap for next level' : 'SPACE for next level') : (isTouch ? 'Tap to restart' : 'Press R'), W / 2, H / 2 + 50);
         ctx.textAlign = 'start';
       }
     }
@@ -416,13 +421,37 @@ export default function BrickBreakerGame({ onGameOver }: { onGameOver?: (p: Game
     }
     function onKeyUp(e: KeyboardEvent) { keysRef.current.delete(e.key); }
 
+    // Touch: drag to move paddle, tap to launch/next level
+    function onTouchStart(e: TouchEvent) {
+      e.preventDefault();
+      const s = stateRef.current;
+      if (s.over && s.won) { nextLevel(); return; }
+      if (s.over && !s.won) { reset(); return; }
+      if (!s.started && !s.over) s.started = true;
+      const rect = canvas!.getBoundingClientRect();
+      const x = e.touches[0].clientX - rect.left;
+      const scale = W / rect.width;
+      s.padX = x * scale - s.padW / 2;
+    }
+    function onTouchMove(e: TouchEvent) {
+      e.preventDefault();
+      const rect = canvas!.getBoundingClientRect();
+      const x = e.touches[0].clientX - rect.left;
+      const scale = W / rect.width;
+      stateRef.current.padX = x * scale - stateRef.current.padW / 2;
+    }
+
     window.addEventListener('keydown', onKey);
     window.addEventListener('keyup', onKeyUp);
+    canvas.addEventListener('touchstart', onTouchStart, { passive: false });
+    canvas.addEventListener('touchmove', onTouchMove, { passive: false });
     raf = requestAnimationFrame(update);
     return () => {
       cancelAnimationFrame(raf);
       window.removeEventListener('keydown', onKey);
       window.removeEventListener('keyup', onKeyUp);
+      canvas.removeEventListener('touchstart', onTouchStart);
+      canvas.removeEventListener('touchmove', onTouchMove);
     };
   }, [reset]);
 
