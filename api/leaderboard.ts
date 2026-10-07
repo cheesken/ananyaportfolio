@@ -40,8 +40,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     if (!VALID_GAMES.includes(game)) {
       return res.status(400).json({ error: 'Invalid game' });
     }
-    if (typeof name !== 'string' || !/^[A-Z]{3}$/.test(name)) {
-      return res.status(400).json({ error: 'Name must be 3 uppercase letters' });
+    if (typeof name !== 'string' || !/^[A-Z0-9]{1,10}$/.test(name)) {
+      return res.status(400).json({ error: 'Name must be 1-10 alphanumeric characters' });
     }
     if (typeof score !== 'number' || !Number.isInteger(score) || score < 1) {
       return res.status(400).json({ error: 'Invalid score' });

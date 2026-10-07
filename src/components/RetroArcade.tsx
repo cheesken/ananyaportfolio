@@ -25,7 +25,6 @@ const gameComponents: Record<GameId, GameComponent> = {
 };
 
 const MEDAL_COLORS = ['#ffd43b', '#c0c0c0', '#cd7f32'];
-const LETTERS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
 type ArcadeView = 'select' | 'playing' | 'name-entry' | 'leaderboard';
 
@@ -43,9 +42,9 @@ export default function RetroArcade({ onClose }: Props) {
   // Leaderboard state
   const [lastResult, setLastResult] = useState<GameOverPayload | null>(null);
   const [leaderboard, setLeaderboard] = useState<LeaderboardEntry[]>([]);
-  const [nameChars, setNameChars] = useState(['A', 'A', 'A']);
-  const [nameCursor, setNameCursor] = useState(0);
+  const [nameInput, setNameInput] = useState('');
   const [submitting, setSubmitting] = useState(false);
+  const nameRef = useRef<HTMLInputElement>(null);
   const [submittedName, setSubmittedName] = useState<string | null>(null);
 
   const GameComp = activeGame ? gameComponents[activeGame] : null;
@@ -115,15 +114,14 @@ export default function RetroArcade({ onClose }: Props) {
 
     // Let the canvas game-over screen show for 1.5s before transitioning
     await new Promise(r => setTimeout(r, 1500));
-    setNameChars(['A', 'A', 'A']);
-    setNameCursor(0);
+    setNameInput('');
     setView(qualifies ? 'name-entry' : 'leaderboard');
   }, []);
 
   const submitScore = async () => {
-    if (submitting || !lastResult) return;
+    const name = nameInput.trim().toUpperCase();
+    if (submitting || !lastResult || !name) return;
     setSubmitting(true);
-    const name = nameChars.join('');
     try {
       await fetch('/api/leaderboard', {
         method: 'POST',
@@ -139,36 +137,10 @@ export default function RetroArcade({ onClose }: Props) {
     setView('leaderboard');
   };
 
-  // Name entry keyboard handler
+  // Auto-focus name input
   useEffect(() => {
-    if (view !== 'name-entry') return;
-    function onKey(e: KeyboardEvent) {
-      e.preventDefault();
-      if (e.key === 'ArrowUp') {
-        setNameChars(prev => {
-          const next = [...prev];
-          const i = LETTERS.indexOf(next[nameCursor]);
-          next[nameCursor] = LETTERS[(i + 1) % 26];
-          return next;
-        });
-      } else if (e.key === 'ArrowDown') {
-        setNameChars(prev => {
-          const next = [...prev];
-          const i = LETTERS.indexOf(next[nameCursor]);
-          next[nameCursor] = LETTERS[(i - 1 + 26) % 26];
-          return next;
-        });
-      } else if (e.key === 'ArrowRight') {
-        setNameCursor(c => Math.min(2, c + 1));
-      } else if (e.key === 'ArrowLeft') {
-        setNameCursor(c => Math.max(0, c - 1));
-      } else if (e.key === 'Enter') {
-        submitScore();
-      }
-    }
-    window.addEventListener('keydown', onKey);
-    return () => window.removeEventListener('keydown', onKey);
-  }, [view, nameCursor, submitScore]);
+    if (view === 'name-entry') nameRef.current?.focus();
+  }, [view]);
 
   // Leaderboard keyboard handler
   useEffect(() => {
@@ -286,7 +258,7 @@ export default function RetroArcade({ onClose }: Props) {
                     className="text-[rgba(0,255,65,0.35)] text-[10px] tracking-wider uppercase cursor-pointer bg-transparent border-t border-[rgba(0,255,65,0.1)] py-1.5 hover:text-[#00ff41] hover:bg-[rgba(0,255,65,0.05)] transition-colors duration-150"
                     style={{ fontFamily: "'Space Mono', monospace" }}
                   >
-                    SCORES
+                    HIGHSCORES
                   </button>
                 </div>
               ))}
@@ -326,32 +298,39 @@ export default function RetroArcade({ onClose }: Props) {
               <p className="text-[#ffd43b] text-lg tracking-[0.15em] m-0">NEW HIGH SCORE!</p>
               <p className="text-[#00ff41] text-2xl m-0">{lastResult.score}</p>
 
-              <div className="flex gap-3">
-                {nameChars.map((ch, i) => (
-                  <div
-                    key={i}
-                    className={`w-10 h-12 flex items-center justify-center text-[#00ff41] text-2xl border-b-2 ${
-                      i === nameCursor ? 'arcade-blink' : 'border-transparent'
-                    }`}
-                  >
-                    {ch}
-                  </div>
-                ))}
-              </div>
-
-              <div className="flex flex-col items-center gap-1 text-[rgba(0,255,65,0.4)] text-[10px]">
-                <span>UP / DOWN — change letter</span>
-                <span>LEFT / RIGHT — move cursor</span>
-                <span>ENTER — confirm</span>
-              </div>
-
-              <button
-                onClick={submitScore}
-                disabled={submitting}
-                className="text-[#00ff41] text-xs tracking-wider uppercase cursor-pointer bg-transparent border border-[rgba(0,255,65,0.3)] px-6 py-2 rounded hover:bg-[rgba(0,255,65,0.1)] transition-colors disabled:opacity-40"
+              <form
+                onSubmit={(e) => { e.preventDefault(); submitScore(); }}
+                className="flex flex-col items-center gap-4"
               >
-                {submitting ? 'SAVING...' : 'SUBMIT'}
-              </button>
+                <div className="relative">
+                  <input
+                    ref={nameRef}
+                    type="text"
+                    value={nameInput}
+                    onChange={(e) => setNameInput(e.target.value.toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 10))}
+                    maxLength={10}
+                    className="absolute inset-0 w-full h-full opacity-0"
+                  />
+                  <div
+                    className="text-[#00ff41] text-lg tracking-[0.2em] uppercase py-2 px-3 min-w-[200px] text-center"
+                    style={{ fontFamily: "'Space Mono', monospace" }}
+                    onClick={() => nameRef.current?.focus()}
+                  >
+                    {nameInput || <span className="text-[rgba(0,255,65,0.2)]">YOUR NAME</span>}
+                    <span className="arcade-cursor-blink">_</span>
+                  </div>
+                </div>
+                <p className="text-[rgba(0,255,65,0.3)] text-[10px] m-0">
+                  TYPE YOUR NAME — ENTER TO SUBMIT
+                </p>
+                <button
+                  type="submit"
+                  disabled={submitting || !nameInput.trim()}
+                  className="text-[#00ff41] text-xs tracking-wider uppercase cursor-pointer bg-transparent border border-[rgba(0,255,65,0.3)] px-6 py-2 rounded hover:bg-[rgba(0,255,65,0.1)] transition-colors disabled:opacity-40"
+                >
+                  {submitting ? 'SAVING...' : 'SUBMIT'}
+                </button>
+              </form>
             </div>
           )}
 
@@ -362,7 +341,7 @@ export default function RetroArcade({ onClose }: Props) {
               style={{ fontFamily: "'Space Mono', monospace" }}
             >
               <p className="text-[#00ff41] text-sm tracking-[0.2em] uppercase m-0">
-                {gameName} — TOP SCORES
+                {gameName} — HIGHSCORES
               </p>
 
               {leaderboard.length === 0 ? (
@@ -401,19 +380,21 @@ export default function RetroArcade({ onClose }: Props) {
 
               <div className="flex gap-4 mt-2">
                 {activeGame && (
-                  <button
-                    onClick={lastResult ? playAgain : () => playGame(activeGame)}
-                    className="text-[#00ff41] text-xs tracking-wider uppercase cursor-pointer bg-transparent border border-[rgba(0,255,65,0.3)] px-5 py-2 rounded hover:bg-[rgba(0,255,65,0.1)] transition-colors"
-                  >
-                    {lastResult ? 'PLAY AGAIN' : 'PLAY'}
-                  </button>
+                  <>
+                    <button
+                      onClick={lastResult ? playAgain : () => playGame(activeGame)}
+                      className="text-[#00ff41] text-xs tracking-wider uppercase cursor-pointer bg-transparent border border-[rgba(0,255,65,0.3)] px-5 py-2 rounded hover:bg-[rgba(0,255,65,0.1)] transition-colors"
+                    >
+                      {lastResult ? 'PLAY AGAIN' : 'PLAY'}
+                    </button>
+                    <button
+                      onClick={() => viewScores(activeGame)}
+                      className="text-[rgba(0,255,65,0.5)] text-xs tracking-wider uppercase cursor-pointer bg-transparent border border-[rgba(0,255,65,0.15)] px-5 py-2 rounded hover:bg-[rgba(0,255,65,0.06)] transition-colors"
+                    >
+                      HIGHSCORES
+                    </button>
+                  </>
                 )}
-                <button
-                  onClick={goToSelect}
-                  className="text-[rgba(0,255,65,0.5)] text-xs tracking-wider uppercase cursor-pointer bg-transparent border border-[rgba(0,255,65,0.15)] px-5 py-2 rounded hover:bg-[rgba(0,255,65,0.06)] transition-colors"
-                >
-                  GAMES
-                </button>
               </div>
             </div>
           )}

@@ -90,7 +90,7 @@ function leaderboardApiPlugin(): Plugin {
           req.on('end', () => {
             try {
               const { game, name, score } = JSON.parse(body)
-              if (!VALID.includes(game) || !/^[A-Z]{3}$/.test(name) ||
+              if (!VALID.includes(game) || !/^[A-Z0-9]{1,10}$/.test(name) ||
                   typeof score !== 'number' || score < 1) {
                 res.statusCode = 400
                 res.end(JSON.stringify({ error: 'Invalid data' }))

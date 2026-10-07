@@ -61,6 +61,13 @@ body.arcade-cursor canvas[data-hide-cursor] * {
 .arcade-blink {
   animation: arcadeBlink 0.6s step-end infinite;
 }
+.arcade-cursor-blink {
+  animation: arcadeCursorBlink 0.8s step-end infinite;
+}
+@keyframes arcadeCursorBlink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
 
 @keyframes cursorFlash {
   0% { opacity: 0; }
