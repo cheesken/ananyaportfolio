@@ -2,7 +2,10 @@ import { Redis } from '@upstash/redis';
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import type { GameId, LeaderboardEntry } from '../src/arcade-types';
 
-const redis = Redis.fromEnv();
+const redis = new Redis({
+  url: process.env.KV_REST_API_URL!,
+  token: process.env.KV_REST_API_TOKEN!,
+});
 
 const VALID_GAMES: GameId[] = ['snake', 'bricks', 'dino', 'bounce'];
 const MAX_ENTRIES = 10;
