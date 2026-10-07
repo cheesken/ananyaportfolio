@@ -60,7 +60,64 @@ function contactApiPlugin(): Plugin {
   }
 }
 
+function leaderboardApiPlugin(): Plugin {
+  const store = new Map<string, { score: number; member: string }[]>()
+  const MAX = 10
+  const VALID = ['snake', 'bricks', 'dino', 'bounce']
+
+  return {
+    name: 'leaderboard-api',
+    configureServer(server) {
+      server.middlewares.use('/api/leaderboard', (req: IncomingMessage, res: ServerResponse) => {
+        res.setHeader('Content-Type', 'application/json')
+
+        if (req.method === 'GET') {
+          const url = new URL(req.url ?? '', 'http://localhost')
+          const game = url.searchParams.get('game')
+          if (!game || !VALID.includes(game)) {
+            res.statusCode = 400
+            res.end(JSON.stringify({ error: 'Invalid game' }))
+            return
+          }
+          const entries = (store.get(game) ?? []).slice(0, MAX).map(e => JSON.parse(e.member))
+          res.end(JSON.stringify({ entries }))
+          return
+        }
+
+        if (req.method === 'POST') {
+          let body = ''
+          req.on('data', (chunk: Buffer) => { body += chunk })
+          req.on('end', () => {
+            try {
+              const { game, name, score } = JSON.parse(body)
+              if (!VALID.includes(game) || !/^[A-Z]{3}$/.test(name) ||
+                  typeof score !== 'number' || score < 1) {
+                res.statusCode = 400
+                res.end(JSON.stringify({ error: 'Invalid data' }))
+                return
+              }
+              const entry = { name, score, ts: Date.now() }
+              const list = store.get(game) ?? []
+              list.push({ score, member: JSON.stringify(entry) })
+              list.sort((a, b) => b.score - a.score)
+              store.set(game, list.slice(0, MAX))
+              res.end(JSON.stringify({ ok: true }))
+            } catch {
+              res.statusCode = 400
+              res.end(JSON.stringify({ error: 'Bad JSON' }))
+            }
+          })
+          return
+        }
+
+        res.statusCode = 405
+        res.end(JSON.stringify({ error: 'Method not allowed' }))
+      })
+    },
+  }
+}
+
 export default defineConfig({
-  plugins: [contactApiPlugin(), react(), tailwindcss()],
+  plugins: [contactApiPlugin(), leaderboardApiPlugin(), react(), tailwindcss()],
   envPrefix: ['VITE_', 'RESEND_', 'CONTACT_'],
 })
