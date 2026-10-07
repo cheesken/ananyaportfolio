@@ -74,6 +74,20 @@ export default function RetroArcade({ onClose }: Props) {
     setSubmittedName(null);
   };
 
+  const viewScores = async (id: GameId) => {
+    setActiveGame(id);
+    setLastResult(null);
+    setSubmittedName(null);
+    try {
+      const res = await fetch(`/api/leaderboard?game=${id}`);
+      const data = await res.json();
+      setLeaderboard(data.entries ?? []);
+    } catch {
+      setLeaderboard([]);
+    }
+    setView('leaderboard');
+  };
+
   const playAgain = () => {
     if (activeGame) {
       setView('playing');
@@ -246,24 +260,35 @@ export default function RetroArcade({ onClose }: Props) {
           {view === 'select' && (
             <div className="grid grid-cols-2 gap-3">
               {games.map(g => (
-                <button
+                <div
                   key={g.id}
-                  onClick={() => playGame(g.id)}
-                  className="flex flex-col items-center gap-2 py-5 px-3 rounded-lg cursor-pointer border border-[rgba(0,255,65,0.15)] bg-[rgba(0,255,65,0.03)] hover:bg-[rgba(0,255,65,0.08)] transition-colors duration-150"
+                  className="flex flex-col rounded-lg border border-[rgba(0,255,65,0.15)] bg-[rgba(0,255,65,0.03)] overflow-hidden"
                 >
-                  <span
-                    className="text-[#00ff41] text-2xl"
+                  <button
+                    onClick={() => playGame(g.id)}
+                    className="flex flex-col items-center gap-2 py-5 px-3 cursor-pointer bg-transparent border-none hover:bg-[rgba(0,255,65,0.08)] transition-colors duration-150"
+                  >
+                    <span
+                      className="text-[#00ff41] text-2xl"
+                      style={{ fontFamily: "'Space Mono', monospace" }}
+                    >
+                      {g.icon}
+                    </span>
+                    <span
+                      className="text-[#00ff41] text-xs tracking-[0.15em] uppercase"
+                      style={{ fontFamily: "'Space Mono', monospace" }}
+                    >
+                      {g.name}
+                    </span>
+                  </button>
+                  <button
+                    onClick={() => viewScores(g.id)}
+                    className="text-[rgba(0,255,65,0.35)] text-[10px] tracking-wider uppercase cursor-pointer bg-transparent border-t border-[rgba(0,255,65,0.1)] py-1.5 hover:text-[#00ff41] hover:bg-[rgba(0,255,65,0.05)] transition-colors duration-150"
                     style={{ fontFamily: "'Space Mono', monospace" }}
                   >
-                    {g.icon}
-                  </span>
-                  <span
-                    className="text-[#00ff41] text-xs tracking-[0.15em] uppercase"
-                    style={{ fontFamily: "'Space Mono', monospace" }}
-                  >
-                    {g.name}
-                  </span>
-                </button>
+                    SCORES
+                  </button>
+                </div>
               ))}
             </div>
           )}
@@ -375,12 +400,14 @@ export default function RetroArcade({ onClose }: Props) {
               )}
 
               <div className="flex gap-4 mt-2">
-                <button
-                  onClick={playAgain}
-                  className="text-[#00ff41] text-xs tracking-wider uppercase cursor-pointer bg-transparent border border-[rgba(0,255,65,0.3)] px-5 py-2 rounded hover:bg-[rgba(0,255,65,0.1)] transition-colors"
-                >
-                  PLAY AGAIN
-                </button>
+                {activeGame && (
+                  <button
+                    onClick={lastResult ? playAgain : () => playGame(activeGame)}
+                    className="text-[#00ff41] text-xs tracking-wider uppercase cursor-pointer bg-transparent border border-[rgba(0,255,65,0.3)] px-5 py-2 rounded hover:bg-[rgba(0,255,65,0.1)] transition-colors"
+                  >
+                    {lastResult ? 'PLAY AGAIN' : 'PLAY'}
+                  </button>
+                )}
                 <button
                   onClick={goToSelect}
                   className="text-[rgba(0,255,65,0.5)] text-xs tracking-wider uppercase cursor-pointer bg-transparent border border-[rgba(0,255,65,0.15)] px-5 py-2 rounded hover:bg-[rgba(0,255,65,0.06)] transition-colors"
