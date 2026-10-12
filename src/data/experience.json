@@ -2,7 +2,7 @@
   {
     "id": 0,
     "company": "Blinc 360 ",
-    "team" : "iOS ",
+    "team" : "Frontend Team",
     "tags": ["iOS", "Frontend"],
     "role": "iOS Developer Intern",
     "duration": "Jun 2018 - Aug 2018",
@@ -120,7 +120,7 @@
     "id": 9,
     "company": "Amazon",
     "team" : "SageMaker Unified Studio",
-    "tags": ["Full Stack", "Cloud", "Backend"],
+    "tags": ["Full Stack", "Cloud", "Backend", "Frontend"],
     "role": "Software Engineer Intern",
     "duration": "May 2026 - Aug 2026",
     "description": [
