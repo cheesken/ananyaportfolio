@@ -1,6 +1,49 @@
 [
   {
+    "id": 0,
+    "company": "Blinc 360 ",
+    "team" : "iOS ",
+    "tags": ["iOS", "Frontend"],
+    "role": "iOS Developer Intern",
+    "duration": "Jun 2018 - Aug 2018",
+    "description": [
+      "Helped create an IOS application that connects Building Information Model (BIM) developers and businesses for collaboration. Swift, Xcode.",
+      "Added classes, methods, inline-comments as part of DOD (Definition of done) to the existing project which improved code readability."
+    ],
+    "technologies": ["Swift"]
+  },
+  {
     "id": 1,
+    "company": "Sett Pub",
+    "tags": ["Other"],
+    "role": "Undergraduate Staff",
+    "duration": "Sept 2019 - April 2020",
+    "description": [
+      "Cashier, chef, bartender, and food runner experience, working in a fast-paced team environment to provide excellent customer service."
+    ]
+  },
+  {
+    "id": 2,
+    "company": "Der Rathskeller",
+    "tags": ["Other"],
+    "role": "Undergraduate Staff",
+    "duration": "April 2020 - May 2020",
+    "description": [
+      "Cashier, chef, bartender, and food runner experience, working in a fast-paced team environment to provide excellent customer service."
+    ]
+  },
+  {
+    "id": 3,
+    "company": "University of Wisconsin Survey Center",
+    "tags": ["Other"],
+    "role": "Telephone (CATI) Interviewer",
+    "duration": "Jun 2020 - Dec 2020",
+    "description": [
+      "Administered scripted telephone interviews for a national health survey using computer-assisted interviewing (CATI) software, ensuring consistent question delivery across a high volume of respondent calls."
+    ]
+  },
+  {
+    "id": 4,
     "company": "University of Wisconsin-Madison",
     "team" : "Division of Information Technology",
     "tags": ["DevOps", "Cloud"],
@@ -13,7 +56,7 @@
     "technologies": ["Informatica", "AWS", "Apigee"]
   },
   {
-    "id": 2,
+    "id": 5,
     "company": "University of Wisconsin-Madison",
     "team" : "Professor Michael Doescher",
     "tags": ["Operating Systems", "Teaching Assistant"],
@@ -29,7 +72,7 @@
     "technologies": ["C++", "C"]
   },
   {
-    "id": 3,
+    "id": 6,
     "company": "University of Wisconsin-Madison",
     "team" : "Professor Sharon Li and Professor Fred Sala",
     "tags": ["AI/ML", "Teaching Assistant"],
@@ -45,7 +88,7 @@
     "technologies": ["Python", "TensorFlow", "PyTorch"]
   },
   {
-    "id": 4,
+    "id": 7,
     "company": "NetApp",
     "team" : "RAID, ONTAP",
     "tags": ["Backend", "Operating Systems"],
@@ -60,7 +103,7 @@
     "technologies": ["C++", "C", "Linux"]
   },
   {
-    "id": 5,
+    "id": 8,
     "company": "NetApp",
     "team" : "RAID, ONTAP",
     "tags": ["Backend", "Operating Systems"],
@@ -74,7 +117,7 @@
     "technologies": ["C++", "C", "Linux"]
   },
   {
-    "id": 6,
+    "id": 9,
     "company": "Amazon",
     "team" : "SageMaker Unified Studio",
     "tags": ["Full Stack", "Cloud", "Backend"],
